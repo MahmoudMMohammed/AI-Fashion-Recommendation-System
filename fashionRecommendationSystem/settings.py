@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     "products.apps.ProductsConfig",
     "orders.apps.OrdersConfig",
     "wallet.apps.WalletConfig",
-    "recommendations.apps.RecommendationsConfig"
+    "recommendations.apps.RecommendationsConfig",
+    "core.apps.CoreConfig"
 ]
 
 MIDDLEWARE = [
@@ -120,6 +121,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+
+    "DEFAULT_PAGINATION_CLASS": "fashionRecommendationSystem.pagination.GlobalPageNumberPagination",
+    "PAGE_SIZE": 20,
 }
 
 # SIMPLE JWT CONFIGURATION
