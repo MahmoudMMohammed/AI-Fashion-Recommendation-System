@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     "orders.apps.OrdersConfig",
     "wallet.apps.WalletConfig",
     "recommendations.apps.RecommendationsConfig",
-    "core.apps.CoreConfig"
 ]
 
 MIDDLEWARE = [
