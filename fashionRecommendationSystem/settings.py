@@ -123,7 +123,17 @@ REST_FRAMEWORK = {
 
     "DEFAULT_PAGINATION_CLASS": "fashionRecommendationSystem.pagination.GlobalPageNumberPagination",
     "PAGE_SIZE": 20,
+
+    "DEFAULT_RENDERER_CLASSES": ["fashionRecommendationSystem.renderers.EnvelopeJSONRenderer"],
+    "EXCEPTION_HANDLER": "fashionRecommendationSystem.exceptions.exception_handler"
+
+
 }
+
+REST_FRAMEWORK.update({
+    "DEFAULT_PAGINATION_CLASS": "fashionRecommendationSystem.pagination.GlobalPageNumberPagination",
+    "PAGE_SIZE": 20,
+})
 
 # SIMPLE JWT CONFIGURATION
 SIMPLE_JWT = {
