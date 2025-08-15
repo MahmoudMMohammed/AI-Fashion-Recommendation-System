@@ -2,7 +2,9 @@ import random
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from faker import Faker
+import numpy as np
 
+from recommendations.models import ImageSegment, StyleImage
 # Import all your models
 from users.models import User, UserProfile
 from products.models import Category, ProductSize, Product, ProductImage  # <--- IMPORT ProductImage
@@ -16,6 +18,7 @@ NUM_PRODUCTS = 50
 NUM_IMAGES_PER_PRODUCT = 3
 NUM_ORDERS_PER_USER = 3
 MAX_ITEMS_PER_ORDER = 5
+EMBEDDING_DIM = 1024
 
 AI_CATEGORIES = [
     'top', 'skirt', 'leggings', 'dress', 'outer', 'pants', 'bag',
@@ -38,8 +41,10 @@ class Command(BaseCommand):
         Order.objects.all().delete()
         Wallet.objects.all().delete()
         UserProfile.objects.all().delete()
-        ProductImage.objects.all().delete()  # <--- DELETE old ProductImages
+        ProductImage.objects.all().delete()
         Product.objects.all().delete()
+        ImageSegment.objects.all().delete()
+        StyleImage.objects.all().delete()
         Category.objects.all().delete()
         ProductSize.objects.all().delete()
         User.objects.all().delete()
@@ -88,7 +93,7 @@ class Command(BaseCommand):
         # Create Profiles and Wallets for all created users (including superuser)
         for user in User.objects.all():
             UserProfile.objects.get_or_create(user=user,
-                                              defaults={'avg_style_vector': [random.random() for _ in range(128)]})
+                                              defaults={'avg_style_vector': np.random.rand(EMBEDDING_DIM).tolist()})
             Wallet.objects.get_or_create(user=user, defaults={
                 'balance': faker.pydecimal(left_digits=3, right_digits=2, positive=True)})
 
@@ -99,6 +104,8 @@ class Command(BaseCommand):
         products = []
         for _ in range(NUM_PRODUCTS):
             # Create the Product instance first
+            fake_embedding = np.random.rand(EMBEDDING_DIM).tolist()
+
             product = Product.objects.create(
                 sku=faker.ean(length=13),
                 name=faker.bs().capitalize(),
@@ -106,7 +113,7 @@ class Command(BaseCommand):
                 base_price=faker.pydecimal(left_digits=3, right_digits=2, positive=True, min_value=10, max_value=200),
                 discount_percent=random.choice([0, 10, 15, 20, 25]),
                 stock_quantity=random.randint(0, 100),
-                # The 'image_urls' field is GONE.
+                embedding=fake_embedding
             )
 
             # --- NEW LOGIC: Create associated ProductImage objects ---

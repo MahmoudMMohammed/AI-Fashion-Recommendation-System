@@ -3,6 +3,7 @@ from django.db import models
 import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from pgvector.django import VectorField
 
 
 class User(AbstractUser):
@@ -25,5 +26,5 @@ class User(AbstractUser):
 class UserProfile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    avg_style_vector = models.JSONField(default=dict)  # JSONField is perfect for storing a vector
+    avg_style_vector = VectorField(dimensions=1024, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)

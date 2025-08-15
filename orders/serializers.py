@@ -3,6 +3,7 @@ from .models import Order, OrderItem, Transaction
 from products.serializers import ProductSerializer  # Reuse product serializer
 from .models import Cart, CartItem
 
+
 class OrderItemSerializer(serializers.ModelSerializer):
     product = ProductSerializer(read_only=True)
     product_id = serializers.UUIDField(write_only=True)
@@ -71,6 +72,7 @@ class CartSerializer(serializers.ModelSerializer):
 class AddCartItemSerializer(serializers.Serializer):
     product_id = serializers.UUIDField()
     quantity = serializers.IntegerField(min_value=1)
+
 
 class UpdateCartItemSerializer(serializers.ModelSerializer):
     class Meta:

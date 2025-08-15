@@ -18,6 +18,9 @@ This is a fashion style recommendation system built with Django, PostgreSQL, Red
 * Download: [PostgreSQL 17 Installer](https://sbp.enterprisedb.com/getfile.jsp?fileid=1259622)
 * During installation, set a password for the `postgres` user.
 
+* Download vector extension for style embeddings [pgvector v0.8.0](https://github.com/andreiramani/pgvector_pgsql_windows/releases/tag/0.8.0_17.3)
+* Download the zip file and see README for installation
+
 After installation, open **Command Prompt** and run:
 
 ```bash
@@ -30,6 +33,7 @@ Enter the password you set during installation, then run:
 CREATE USER style_recommender WITH PASSWORD 'style_recommender';
 ALTER USER style_recommender WITH SUPERUSER;
 CREATE DATABASE "style_recommendation_system";
+CREATE EXTENSION IF NOT EXISTS vector;
 ```
 
 ---

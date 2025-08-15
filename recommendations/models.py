@@ -2,6 +2,8 @@ from django.db import models
 
 import uuid
 from django.db import models
+from pgvector.django import VectorField
+
 from users.models import User
 from products.models import Product, Category
 
@@ -23,10 +25,9 @@ class ImageSegment(models.Model):  # Renamed for clarity from Image_Segments
 
 class StyleEmbedding(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, name="embeddingId")
-    # This can be linked to either a user's uploaded segment or a product's image
     segment = models.OneToOneField(ImageSegment, on_delete=models.CASCADE, null=True, blank=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=True)
-    embeddings = models.JSONField()  # Store the list of decimals (vector)
+    embeddings = VectorField(dimensions=1024, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 
