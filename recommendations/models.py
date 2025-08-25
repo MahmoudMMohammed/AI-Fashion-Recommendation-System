@@ -27,7 +27,7 @@ class StyleEmbedding(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, name="embeddingId")
     segment = models.OneToOneField(ImageSegment, on_delete=models.CASCADE, null=True, blank=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=True)
-    embeddings = VectorField(dimensions=1024, null=True, blank=True)
+    embeddings = VectorField(dimensions=2048, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 

@@ -18,7 +18,7 @@ NUM_PRODUCTS = 50
 NUM_IMAGES_PER_PRODUCT = 3
 NUM_ORDERS_PER_USER = 3
 MAX_ITEMS_PER_ORDER = 5
-EMBEDDING_DIM = 1024
+EMBEDDING_DIM = 2048
 
 AI_CATEGORIES = [
     'top', 'skirt', 'leggings', 'dress', 'outer', 'pants', 'bag',

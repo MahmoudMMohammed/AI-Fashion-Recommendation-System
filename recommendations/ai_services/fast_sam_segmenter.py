@@ -10,14 +10,14 @@ PROMPT_MAP = {
     'dress': 'long dress or skirt',
     'skirt': 'a garment hanging from the waist, like a skirt',
     'leggings': 'tight-fitting stretch pants, e.g. leggings',
-    'bag': 'a flexible container for carrying items, such as a bag',
+    'bag': 'bag',
     'neckwear': 'accessory worn around the neck like a scarf, tie or necklace',
-    'headwear': 'accessory worn on the head such as a hat, cap or headband',
-    'eyeglass': 'corrective or protective eyewear, e.g. glasses',
+    'headwear': 'hat above the head',
+    'eyeglass': 'glasses or sunglasses',
     'hair': 'hair on the head',
     'skin': 'exposed skin regions',
     'face': 'the face region including eyes, nose and mouth',
-    'footwear': 'shoes, boots or any covering worn on the feet',
+    'footwear': 'something worn in feets like shoes',
     'pants': 'pants, shorts or trousers',
     'default': ''
 }
@@ -30,38 +30,61 @@ class FastSAMSegmenter:
 
     def segment_object(self, image_path, category_name):
         """
-        Takes an image path and a category name, returns the cropped segment image as a NumPy array.
+        Final robust version with added print statements for debugging shape mismatches.
         """
         source = cv2.imread(image_path)
-        source_rgb = cv2.cvtColor(source, cv2.COLOR_BGR2RGB)
-        h, w = source_rgb.shape[:2]
+        if source is None:
+            print(f"[DEBUG] Error: Could not read image from path: {image_path}")
+            return None
 
         prompt = PROMPT_MAP.get(category_name, category_name)
 
+        # --- Run Inference ---
+        print(f"[DEBUG] Running FastSAM for prompt: '{prompt}' on image with shape: {source.shape}")
         results = self.model(source, texts=prompt)
 
-        # Check if any masks were returned
-        if results[0].masks is None or len(results[0].masks) == 0:
-            return None  # No object found for this prompt
+        if results[0].masks is None or len(results[0].masks.data) == 0:
+            print(f"[DEBUG] FastSAM found no masks for prompt '{prompt}'")
+            return None
 
-        masks = results[0].masks.data.cpu().numpy()
-        mask = masks[0]
-        mask = cv2.resize(mask, (w, h), interpolation=cv2.INTER_NEAREST)
+        # --- Process Mask ---
+        mask = results[0].masks.data[0].cpu().numpy()
+        print(f"[DEBUG] Initial mask shape from model: {mask.shape}")
 
-        # Create a white background and apply the mask
+        # Let's get the height and width the model *actually* used for its output mask
+        mask_h, mask_w = mask.shape[:2]
+
+        # --- Prepare source image ---
+        # The source image must be resized to match the mask dimensions for the cutout
+        # Let's use the dimensions of the returned mask as the source of truth.
+        source_rgb = cv2.cvtColor(source, cv2.COLOR_BGR2RGB)
+
+        if source_rgb.shape[:2] != (mask_h, mask_w):
+            print(f"[DEBUG] Resizing source image from {source_rgb.shape[:2]} to match mask {(mask_h, mask_w)}")
+            source_rgb = cv2.resize(source_rgb, (mask_w, mask_h))
+
         white_bg = np.ones_like(source_rgb) * 255
-        cutout = np.where(mask[..., None] > 0, source_rgb, white_bg)
 
-        # Find the bounding box of the non-white object to crop it
-        gray = cv2.cvtColor(cutout, cv2.COLOR_RGB2GRAY)
-        _, binary = cv2.threshold(gray, 250, 255, cv2.THRESH_BINARY_INV)
-        ys, xs = np.where(binary > 0)
+        # --- Final Shape Check Before Crashing Line ---
+        mask_3d = mask.astype(np.uint8)[..., np.newaxis]
+
+        print("-------------------- FINAL SHAPE CHECK --------------------")
+        print(f"[DEBUG] Shape of mask_3d (condition):      {mask_3d.shape}")
+        print(f"[DEBUG] Shape of source_rgb (choice 1):    {source_rgb.shape}")
+        print(f"[DEBUG] Shape of white_bg (choice 2):      {white_bg.shape}")
+        print("---------------------------------------------------------")
+
+        # This is the line that fails
+        cutout = np.where(mask_3d > 0, source_rgb, white_bg)
+
+        # --- Crop to Bounding Box ---
+        ys, xs = np.where(mask > 0)
 
         if len(xs) > 0 and len(ys) > 0:
             x_min, x_max = xs.min(), xs.max()
             y_min, y_max = ys.min(), ys.max()
+
             cropped_cutout = cutout[y_min:y_max + 1, x_min:x_max + 1]
-            # Convert back to BGR for saving with OpenCV/Django
             return cv2.cvtColor(cropped_cutout, cv2.COLOR_RGB2BGR)
 
-        return None  # Return None if no object pixels were found
+        return None

@@ -2,7 +2,7 @@ from decimal import Decimal
 
 import uuid
 from django.db import models
-from pgvector.django import VectorField, HnswIndex
+from pgvector.django import VectorField, HnswIndex, IvfflatIndex
 
 
 class Category(models.Model):
@@ -28,7 +28,7 @@ class Product(models.Model):
     base_price = models.DecimalField(max_digits=10, decimal_places=2)
     discount_percent = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     stock_quantity = models.IntegerField()
-    embedding = VectorField(dimensions=1024, null=True, blank=True)
+    embedding = VectorField(dimensions=2048, null=True, blank=True)
 
     categories = models.ManyToManyField(Category, related_name='products')
     sizes = models.ManyToManyField(ProductSize, related_name='products')
@@ -43,16 +43,29 @@ class Product(models.Model):
     def is_in_stock(self, qty):
         return self.stock_quantity >= qty
 
+    # class Meta:
+    #     indexes = [
+    #         HnswIndex(
+    #             name="emb_hnsw_cos",
+    #             fields=["embedding"],
+    #             m=16,  # graph connectivity (good default)
+    #             ef_construction=64,  # build-time accuracy
+    #             opclasses=["vector_cosine_ops"]
+    #         )
+    #     ]
+    
+    # class Meta:
+    #     indexes = [
+    #         IvfflatIndex(
+    #             name="emb_ivf_cos",
+    #             fields=["embedding"],
+    #             lists=100,
+    #             opclasses=["vector_cosine_ops"]
+    #         )
+    #     ]
+
     class Meta:
-        indexes = [
-            HnswIndex(
-                name="emb_hnsw_cos",
-                fields=["embedding"],
-                m=16,  # graph connectivity (good default)
-                ef_construction=64,  # build-time accuracy
-                opclasses=["vector_cosine_ops"]
-            )
-        ]
+        indexes = []
 
 
 class ProductImage(models.Model):

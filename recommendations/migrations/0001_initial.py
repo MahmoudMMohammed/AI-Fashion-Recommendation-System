@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
             name='StyleEmbedding',
             fields=[
                 ('embeddingId', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('embeddings', pgvector.django.vector.VectorField(blank=True, dimensions=1024, null=True)),
+                ('embeddings', pgvector.django.vector.VectorField(blank=True, dimensions=2048, null=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
             ],
         ),

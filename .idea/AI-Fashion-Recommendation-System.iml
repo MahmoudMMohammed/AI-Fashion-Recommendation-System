@@ -14,18 +14,22 @@
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
-      <excludeFolder url="file://$MODULE_DIR$/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/.style2vec_env" />
+      <excludeFolder url="file://$MODULE_DIR$/logs/20250825-103717" />
+      <excludeFolder url="file://$MODULE_DIR$/logs/20250825-104051" />
+      <excludeFolder url="file://$MODULE_DIR$/logs/20250825-104235" />
+      <excludeFolder url="file://$MODULE_DIR$/media/products" />
+      <excludeFolder url="file://$MODULE_DIR$/media/segments" />
+      <excludeFolder url="file://$MODULE_DIR$/media/style_images" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.10 (AI-Fashion-Recommendation-System)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+  <component name="PyDocumentationSettings">
+    <option name="format" value="PLAIN" />
+    <option name="myDocStringFormat" value="Plain" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
-    <option name="TEMPLATE_FOLDERS">
-      <list>
-        <option value="$MODULE_DIR$/../fashionRecommendationSystem\templates" />
-      </list>
-    </option>
   </component>
 </module>

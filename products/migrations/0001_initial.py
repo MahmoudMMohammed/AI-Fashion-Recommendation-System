@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
                 ('base_price', models.DecimalField(decimal_places=2, max_digits=10)),
                 ('discount_percent', models.DecimalField(decimal_places=2, default=0, max_digits=5)),
                 ('stock_quantity', models.IntegerField()),
-                ('embedding', pgvector.django.vector.VectorField(blank=True, dimensions=1024, null=True)),
+                ('embedding', pgvector.django.vector.VectorField(blank=True, dimensions=2048, null=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('categories', models.ManyToManyField(related_name='products', to='products.category')),
@@ -61,8 +61,17 @@ class Migration(migrations.Migration):
                 ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='products.product')),
             ],
         ),
-        migrations.AddIndex(
-            model_name='product',
-            index=pgvector.django.indexes.HnswIndex(ef_construction=64, fields=['embedding'], m=16, name='emb_hnsw_cos', opclasses=['vector_cosine_ops']),
-        ),
+        # migrations.AddIndex(
+        #     model_name='product',
+        #     index=pgvector.django.indexes.HnswIndex(ef_construction=64, fields=['embedding'], m=16, name='emb_hnsw_cos', opclasses=['vector_cosine_ops']),
+        # ),
+        # migrations.AddIndex(
+        #     model_name='product',
+        #     index=pgvector.django.indexes.IvfflatIndex(
+        #         fields=['embedding'], 
+        #         name='emb_ivf_cos', 
+        #         opclasses=['vector_cosine_ops'], 
+        #         lists=100
+        #     ),
+        # ),
     ]

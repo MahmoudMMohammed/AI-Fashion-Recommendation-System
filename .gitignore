@@ -1,2 +1,6 @@
 .env
 /ai_models/*
+.idea
+.style2vec_env
+/logs/*
+/media/*
