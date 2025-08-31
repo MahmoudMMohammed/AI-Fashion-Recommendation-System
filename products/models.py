@@ -13,11 +13,25 @@ class Category(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Categories"
+
 
 class ProductSize(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, name="sizeId")
     label = models.CharField(max_length=50)  # e.g., "S", "M", "42"
     dimensions = models.CharField(max_length=100, blank=True)  # e.g., "32x34"
+
+    def __str__(self):
+        if self.dimensions:
+            return f"{self.label} ({self.dimensions})"
+        return self.label
+
+    class Meta:
+        ordering = ['label']
 
 
 class Product(models.Model):
@@ -36,9 +50,13 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f"{self.name} (SKU: {self.sku})"
+
     def get_final_price(self):
-        discount = self.discount_percent / Decimal('100')
-        return self.base_price * (Decimal('1') - discount)
+        base = self.base_price or Decimal('0')
+        pct = self.discount_percent or Decimal('0')
+        return base * (Decimal('1') - (pct / Decimal('100')))
 
     def is_in_stock(self, qty):
         return self.stock_quantity >= qty

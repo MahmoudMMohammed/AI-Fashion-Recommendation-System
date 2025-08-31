@@ -16,6 +16,9 @@ class Wallet(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f"{self.user.username}'s Wallet (${self.balance})"
+
     # These methods are better handled in a service layer to ensure transactional integrity.
     # Example implementation:
     def deposit(self, amount):

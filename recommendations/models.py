@@ -14,6 +14,11 @@ class StyleImage(models.Model):
     image_url = models.ImageField(upload_to='style_images/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        if self.user:
+            return f"Style Image by {self.user.username} ({self.uploaded_at.strftime('%Y-%m-%d')})"
+        return f"Anonymous Style Image ({self.uploaded_at.strftime('%Y-%m-%d')})"
+
 
 class ImageSegment(models.Model):  # Renamed for clarity from Image_Segments
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, name="segmentId")
@@ -21,6 +26,9 @@ class ImageSegment(models.Model):  # Renamed for clarity from Image_Segments
     # This refers to the segmented image (e.g., the cropped shirt)
     image_url = models.ImageField(upload_to='segments/')
     category_type = models.ForeignKey(Category, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return f"{self.category_type.name} segment from {self.style_image}"
 
 
 class StyleEmbedding(models.Model):
@@ -30,6 +38,13 @@ class StyleEmbedding(models.Model):
     embeddings = VectorField(dimensions=2048, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        if self.segment:
+            return f"Embedding for {self.segment}"
+        elif self.product:
+            return f"Embedding for {self.product.name}"
+        return f"Embedding {self.embeddingId}"
+
 
 class RecommendationLog(models.Model):  # Renamed for clarity
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, name="logId")
@@ -38,12 +53,19 @@ class RecommendationLog(models.Model):  # Renamed for clarity
     recommended_products = models.ManyToManyField(Product)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"Recommendations for {self.user.username} ({self.created_at.strftime('%Y-%m-%d')})"
+
 
 class Feedback(models.Model):  # Renamed for clarity
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, name="feedbackId")
     log = models.ForeignKey(RecommendationLog, on_delete=models.CASCADE, related_name='feedbacks')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     is_good = models.BooleanField()
+
+    def __str__(self):
+        feedback_type = "Positive" if self.is_good else "Negative"
+        return f"{feedback_type} feedback from {self.user.username}"
 
     class Meta:
         constraints = [

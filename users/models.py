@@ -23,12 +23,20 @@ class User(AbstractUser):
     # USERNAME_FIELD = 'email'
     # REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
 
+    def __str__(self):
+        if self.first_name and self.last_name:
+            return f"{self.first_name} {self.last_name} ({self.username})"
+        return self.username
+
 
 class UserProfile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     avg_style_vector = VectorField(dimensions=2048, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Profile for {self.user.username}"
 
 
 class Notification(models.Model):
@@ -47,6 +55,10 @@ class Notification(models.Model):
     is_read = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     read_at = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        status = "Read" if self.is_read else "Unread"
+        return f"{self.title} - {self.recipient.username} ({status})"
 
     class Meta:
         ordering = ["-created_at"]
