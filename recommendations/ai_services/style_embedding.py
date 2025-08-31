@@ -10,6 +10,7 @@ import os
 from ..models import ImageSegment, StyleEmbedding
 from .recommender_service import get_recommendations
 
+
 @shared_task
 def process_style_embedding(image_segment_id):
     """
@@ -24,7 +25,7 @@ def process_style_embedding(image_segment_id):
 
     # Path to the image segment
     image_path = segment.image_url.path
-    
+
     # Use the singleton approach for better performance
     # The model will be loaded only once and reused for all subsequent calls
     try:
@@ -32,10 +33,10 @@ def process_style_embedding(image_segment_id):
         current_dir = os.path.dirname(os.path.abspath(__file__))
         project_root = os.path.abspath(os.path.join(current_dir, '..', '..'))
         venv_python = os.path.join(project_root, 'style2vec_env', 'Scripts', 'python.exe')
-        
+
         # Path to the singleton script
         script_path = os.path.join(current_dir, 'style2vec_singleton.py')
-        
+
         # Run the singleton script in the style2vec_env
         result = subprocess.run(
             [venv_python, script_path, image_path],
@@ -50,7 +51,7 @@ def process_style_embedding(image_segment_id):
             if line.strip().startswith('{'):
                 json_line = line
                 break
-        
+
         if json_line:
             embedding_data = json.loads(json_line)
             embedding_vector = embedding_data.get('embedding')
@@ -84,109 +85,3 @@ def process_style_embedding(image_segment_id):
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
         return f"An unexpected error occurred: {e}"
-
-
-
-
-
-
-# # ai_services/style_embedding.py
-
-# import json
-# import subprocess
-# from celery import shared_task
-# from django.db import transaction
-
-# # استيراد الموديلات
-# from ..models import ImageSegment, StyleEmbedding
-
-# @shared_task
-# def process_style_embedding(image_segment_id):
-#     """
-#     Celery task to generate style embedding for an ImageSegment.
-#     This task calls an external script running in a different virtual environment.
-#     """
-#     try:
-#         segment = ImageSegment.objects.get(segmentId=image_segment_id)
-#     except ImageSegment.DoesNotExist:
-#         print(f"ImageSegment with id {image_segment_id} not found.")
-#         return
-
-#     # Path to the virtual environment's python interpreter
-#     # تأكد من تعديل هذا المسار ليتناسب مع مسار مشروعك
-#     venv_python = r"E:/University Projects/Project 2/Store/AI-Fashion-Recommendation-System-main/style2vec_env/Scripts/python.exe"
-
-#     # Path to the script that will generate the embedding
-#     # قم بإنشاء هذا الملف في الخطوة التالية
-#     script_path = "E:/University Projects/Project 2/Store/AI-Fashion-Recommendation-System-main/recommendations/ai_services/generate_embedding.py"
-
-#     # Path to the image segment
-#     image_path = segment.image_url.path
-    
-#     # Run the script using subprocess within the correct virtual environment
-#     # The output will be a JSON string of the embedding vector
-
-    
-#     try:
-#         result = subprocess.run(
-#             [venv_python, script_path, image_path],
-#             capture_output=True,
-#             text=True,
-#             check=True
-#         )
-
-#         # print the outputs for debugging
-#         print("Script stdout:", result.stdout)
-#         print("Script stderr:", result.stderr)
-
-#         json_line = None
-#         for line in result.stdout.splitlines():
-#             # البحث عن السطر الذي يبدأ بـ '{' لضمان أنه JSON
-#             if line.strip().startswith('{'):
-#                 json_line = line
-#                 break
-        
-#         if json_line:
-#             embedding_data = json.loads(json_line)
-#             embedding_vector = embedding_data.get('embedding')
-#         else:
-#             print("Failed to find JSON output from the script.")
-#             return "Failed to find JSON output."
-
-#         if embedding_vector:
-#             embedding = StyleEmbedding.objects.create(
-#                 segment=segment,
-#                 embeddings=json.dumps(embedding_vector)
-#             )
-#             return f"Embedding complete for segment {segment.segmentId}"
-#         else:
-#             print("Failed to get embedding vector from the script.")
-#             return "Failed to get embedding vector."
-        
-#         # Parse the JSON output
-#         embedding_data = json.loads(result.stdout)
-#         embedding_vector = embedding_data.get('embedding')
-
-#         if embedding_vector:
-#             # Save the embedding to the database
-#             embedding = StyleEmbedding.objects.create(
-#                 style_image=segment.style_image,
-#                 image_segment=segment,
-#                 embedding_vector=json.dumps(embedding_vector)
-#             )
-#             print(f"Embedding successfully created for segment ID: {segment.id}")
-#             return f"Embedding complete for segment {segment.id}"
-#         else:
-#             print("Failed to get embedding vector from the script.")
-#             return "Failed to get embedding vector."
-
-#     except subprocess.CalledProcessError as e:
-#         print(f"Error running the embedding script: {e}")
-#         print(f"Stderr: {e.stderr}")
-#         return f"Error during embedding generation: {e}"
-#     except json.JSONDecodeError:
-#         print("Failed to decode JSON from script output.")
-#         return "JSON decode error."
-#     except Exception as e:
-#         print(f"An unexpected error occurred: {e}")
-#         return f"An unexpected error occurred: {e}"
