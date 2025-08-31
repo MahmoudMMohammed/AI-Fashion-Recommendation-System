@@ -1,7 +1,8 @@
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 from .models import StyleImage, RecommendationLog, Feedback
-from .serializers import StyleImageSerializer, RecommendationLogSerializer, FeedbackSerializer
+from .serializers import StyleImageSerializer, FeedbackSerializer, \
+    RecommendationLogListSerializer, RecommendationLogDetailSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
 from .tasks import process_style_image_segmentation  # <--- IMPORT THE TASK
 
@@ -33,11 +34,17 @@ class StyleImageViewSet(viewsets.ModelViewSet):
 
 class RecommendationLogViewSet(viewsets.ReadOnlyModelViewSet):
     """View a history of your recommendations."""
-    serializer_class = RecommendationLogSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         return RecommendationLog.objects.filter(user=self.request.user)
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return RecommendationLogListSerializer
+        if self.action == 'retrieve':
+            return RecommendationLogDetailSerializer
+        return RecommendationLogDetailSerializer  # fallback if you add other actions
 
 
 class FeedbackViewSet(viewsets.ModelViewSet):

@@ -169,6 +169,7 @@ SIMPLE_JWT = {
     "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
     "TOKEN_TYPE_CLAIM": "token_type",
     "TOKEN_USER_CLASS": "rest_framework_simplejwt.models.TokenUser",
+    "TOKEN_OBTAIN_SERIALIZER": 'users.serializers.CustomTokenObtainPairSerializer',
 
     "JTI_CLAIM": "jti",
 }
@@ -190,8 +191,7 @@ DJOSER = {
     'PASSWORD_RESET_CONFIRM_RETYPE': True,
     # Use Simple JWT tokens
     'SERIALIZERS': {
-        # You can customize these serializers later if needed
-        'user_create': 'djoser.serializers.UserCreateSerializer',
+        'user_create': 'users.serializers.CustomUserCreateSerializer',
         'user': 'djoser.serializers.UserSerializer',
         'current_user': 'djoser.serializers.UserSerializer',
         'user_delete': 'djoser.serializers.UserDeleteSerializer',

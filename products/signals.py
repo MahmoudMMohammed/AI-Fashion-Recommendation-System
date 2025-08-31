@@ -38,7 +38,7 @@ def generate_embedding_from_image(image_path):
         # Path to the virtual environment's python interpreter
         current_dir = os.path.dirname(os.path.abspath(__file__))
         project_root = os.path.abspath(os.path.join(current_dir, '..'))
-        venv_python = os.path.join(project_root, '.style2vec_env', 'Scripts', 'python.exe')
+        venv_python = os.path.join(project_root, 'style2vec_env', 'Scripts', 'python.exe')
         
         # Path to the generate_embedding.py script
         script_path = os.path.join(project_root, 'recommendations', 'ai_services', 'util', 'generate_embedding.py')

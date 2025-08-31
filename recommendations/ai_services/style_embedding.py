@@ -31,7 +31,7 @@ def process_style_embedding(image_segment_id):
         # Path to the virtual environment's python interpreter
         current_dir = os.path.dirname(os.path.abspath(__file__))
         project_root = os.path.abspath(os.path.join(current_dir, '..', '..'))
-        venv_python = os.path.join(project_root, '.style2vec_env', 'Scripts', 'python.exe')
+        venv_python = os.path.join(project_root, 'style2vec_env', 'Scripts', 'python.exe')
         
         # Path to the singleton script
         script_path = os.path.join(current_dir, 'style2vec_singleton.py')

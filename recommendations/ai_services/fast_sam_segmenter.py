@@ -22,6 +22,40 @@ PROMPT_MAP = {
     'default': ''
 }
 
+# match prompt_category:
+#     case 'top':
+#         prompt_category = 'top or t-shirt'
+#     case 'outer':
+#         prompt_category = 'an outer jacket or coat'
+#     case 'belt':
+#         prompt_category = 'a belt worn around the waist'
+#     case 'footwear':
+#         prompt_category = 'something worn in feets like shoes'
+#     case 'dress':
+#         prompt_category = 'a long dress or a skirt'
+#     case 'pants':
+#         prompt_category = 'pants shorts or trousers'
+#     case 'skirt':
+#         prompt_category = 'a skirt worn on the lower body'
+#     case 'leggings':
+#         prompt_category = 'tight-fitting stretch pants or leggings'
+#     case 'bag':
+#         prompt_category = 'bag'
+#     case 'neckwear':
+#         prompt_category = 'a scarf tie or necklace'
+#     case 'headwear':
+#         prompt_category = 'hat above the head'
+#     case 'eyeglass':
+#         prompt_category = ' '
+#     case 'hair':
+#         prompt_category = 'hair on the head'
+#     case 'skin':
+#         prompt_category = 'exposed human skin'
+#     case 'face':
+#         prompt_category = 'the human face'
+#     case _:
+#         prompt_category = prompt_category
+
 
 class FastSAMSegmenter:
     def __init__(self):

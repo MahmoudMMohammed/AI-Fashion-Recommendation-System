@@ -47,3 +47,10 @@ class ProductSerializer(serializers.ModelSerializer):
 
     def get_final_price(self, obj):
         return obj.get_final_price()
+
+
+class ProductMiniSerializer(serializers.ModelSerializer):
+    images = ProductImageSerializer(many=True, read_only=True)
+    class Meta:
+        model = Product
+        fields = ("productId", "name", "base_price", "images")

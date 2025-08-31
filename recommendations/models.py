@@ -44,3 +44,8 @@ class Feedback(models.Model):  # Renamed for clarity
     log = models.ForeignKey(RecommendationLog, on_delete=models.CASCADE, related_name='feedbacks')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     is_good = models.BooleanField()
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'log'], name='uniq_feedback_user_log')
+        ]

@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.core.mail import send_mail
 from django.core.cache import cache
+from django.contrib.auth import get_user_model
 
 from .models import UserProfile
 from .serializers import UserProfileSerializer
@@ -40,6 +41,7 @@ class UserProfileViewSet(mixins.RetrieveModelMixin,
 
 class PasswordResetCodeView(APIView):
     permission_classes = [AllowAny]
+
     def post(self, request):
         email = request.data.get("email")
         if not email:
@@ -62,6 +64,7 @@ class PasswordResetCodeView(APIView):
 
 class PasswordResetConfirmWithCode(APIView):
     permission_classes = [AllowAny]
+
     def post(self, request):
         email = request.data.get("email")
         code = request.data.get("code")
@@ -71,7 +74,6 @@ class PasswordResetConfirmWithCode(APIView):
         if not cached_code or cached_code != code:
             return Response({"error": "Invalid or expired code"}, status=400)
 
-        from django.contrib.auth import get_user_model
         User = get_user_model()
         try:
             user = User.objects.get(email=email)

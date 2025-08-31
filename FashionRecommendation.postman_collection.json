@@ -39,6 +39,11 @@
 									"key": "email",
 									"value": "test@gmail.com",
 									"type": "text"
+								},
+								{
+									"key": "fcm_token",
+									"value": "dhXMu4u9yWizvEPcgLl2q2:APA91bHCcLwI-AstKdPdwVWRzlsqjy9_MmwUkegqIHjy3ZsZqgu9lqyBH7fecqx3BYJlSDNm4XDh6PPpuh4t7ScpN8v3VzR95u9cDq0GHsB69v-yFhvyshk",
+									"type": "text"
 								}
 							]
 						},
@@ -166,6 +171,11 @@
 									"key": "password",
 									"value": "password123",
 									"description": "password123",
+									"type": "text"
+								},
+								{
+									"key": "fcm_token",
+									"value": "dhXMu4u9yWizvEPcgLl2q2:APA91bHCcLwI-AstKdPdwVWRzlsqjy9_MmwUkegqIHjy3ZsZqgu9lqyBH7fecqx3BYJlSDNm4XDh6PPpuh4t7ScpN8v3VzR95u9cDq0GHsB69v-yFhvyshk",
 									"type": "text"
 								}
 							]
@@ -1218,7 +1228,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0ODMzNjg1LCJpYXQiOjE3NTQ4MzAwODUsImp0aSI6IjljNDhmMzM3NWE1NzQ2ZDk5MThlZTExODA2NmY0ODcxIiwidXNlcl9pZCI6IjEwNCJ9.s62-OsSy3QQ75ywj5DOsbfMq-Y157ySM3XLI333-cg8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MjYzNzIxLCJpYXQiOjE3NTUyNjAxMjEsImp0aSI6Ijk5OTI2MjIzMWQyNjQ5ZjFhZDRhOTY3NGUzMWVjNjk5IiwidXNlcl9pZCI6IjEwNCJ9.0k403locUkKpp2cbhHAsYLMkatRy6hN91UiNYyf8Q_4",
 									"type": "string"
 								}
 							]
@@ -2329,7 +2339,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0ODMzNzk1LCJpYXQiOjE3NTQ4MzAxOTUsImp0aSI6IjRmYTY1MGY2NjYzNDRkNjNiMGI5MWIzNDhlMDQzMWMzIiwidXNlcl9pZCI6IjEwNCJ9.BzbTyJsEWaQvhzICeViqGppUKw9ZFA-urAOtB_WYGEQ",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MjYzNzIxLCJpYXQiOjE3NTUyNjAxMjEsImp0aSI6Ijk5OTI2MjIzMWQyNjQ5ZjFhZDRhOTY3NGUzMWVjNjk5IiwidXNlcl9pZCI6IjEwNCJ9.0k403locUkKpp2cbhHAsYLMkatRy6hN91UiNYyf8Q_4",
 									"type": "string"
 								}
 							]
@@ -2426,7 +2436,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0ODMzNzk1LCJpYXQiOjE3NTQ4MzAxOTUsImp0aSI6IjRmYTY1MGY2NjYzNDRkNjNiMGI5MWIzNDhlMDQzMWMzIiwidXNlcl9pZCI6IjEwNCJ9.BzbTyJsEWaQvhzICeViqGppUKw9ZFA-urAOtB_WYGEQ",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MjYzNzIxLCJpYXQiOjE3NTUyNjAxMjEsImp0aSI6Ijk5OTI2MjIzMWQyNjQ5ZjFhZDRhOTY3NGUzMWVjNjk5IiwidXNlcl9pZCI6IjEwNCJ9.0k403locUkKpp2cbhHAsYLMkatRy6hN91UiNYyf8Q_4",
 									"type": "string"
 								}
 							]
@@ -2521,7 +2531,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0ODMzNzk1LCJpYXQiOjE3NTQ4MzAxOTUsImp0aSI6IjRmYTY1MGY2NjYzNDRkNjNiMGI5MWIzNDhlMDQzMWMzIiwidXNlcl9pZCI6IjEwNCJ9.BzbTyJsEWaQvhzICeViqGppUKw9ZFA-urAOtB_WYGEQ",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MjYzNzIxLCJpYXQiOjE3NTUyNjAxMjEsImp0aSI6Ijk5OTI2MjIzMWQyNjQ5ZjFhZDRhOTY3NGUzMWVjNjk5IiwidXNlcl9pZCI6IjEwNCJ9.0k403locUkKpp2cbhHAsYLMkatRy6hN91UiNYyf8Q_4",
 									"type": "string"
 								}
 							]
@@ -2894,7 +2904,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0ODM0ODUzLCJpYXQiOjE3NTQ4MzEyNTMsImp0aSI6IjkzYWU3NjExZTAxMjRmMjViMTFmOWIyZDZlYzdlODAwIiwidXNlcl9pZCI6IjkzIn0.kPEDQZtfLDZqaFbP3P-QTK9CRa87jQPtg7gfQdGCtJM",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MjYzNzIxLCJpYXQiOjE3NTUyNjAxMjEsImp0aSI6Ijk5OTI2MjIzMWQyNjQ5ZjFhZDRhOTY3NGUzMWVjNjk5IiwidXNlcl9pZCI6IjEwNCJ9.0k403locUkKpp2cbhHAsYLMkatRy6hN91UiNYyf8Q_4",
 									"type": "string"
 								}
 							]
@@ -2995,7 +3005,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0ODM0ODUzLCJpYXQiOjE3NTQ4MzEyNTMsImp0aSI6IjkzYWU3NjExZTAxMjRmMjViMTFmOWIyZDZlYzdlODAwIiwidXNlcl9pZCI6IjkzIn0.kPEDQZtfLDZqaFbP3P-QTK9CRa87jQPtg7gfQdGCtJM",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MjYzNzIxLCJpYXQiOjE3NTUyNjAxMjEsImp0aSI6Ijk5OTI2MjIzMWQyNjQ5ZjFhZDRhOTY3NGUzMWVjNjk5IiwidXNlcl9pZCI6IjEwNCJ9.0k403locUkKpp2cbhHAsYLMkatRy6hN91UiNYyf8Q_4",
 									"type": "string"
 								}
 							]
@@ -3120,7 +3130,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0ODMzNzk1LCJpYXQiOjE3NTQ4MzAxOTUsImp0aSI6IjRmYTY1MGY2NjYzNDRkNjNiMGI5MWIzNDhlMDQzMWMzIiwidXNlcl9pZCI6IjEwNCJ9.BzbTyJsEWaQvhzICeViqGppUKw9ZFA-urAOtB_WYGEQ",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2NTcxOTA1LCJpYXQiOjE3NTY1NjgzMDYsImp0aSI6ImQ1MWVkNDY3MjY3ZTQyMWY5NmMzM2Q3MGEwNGZjMzlhIiwidXNlcl9pZCI6IjEyIn0.jDue0VGAY6Ya2mnhNI64hVr4ooykekpsB_lnwKgKx4E",
 									"type": "string"
 								}
 							]
@@ -3238,7 +3248,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0ODMzNzk1LCJpYXQiOjE3NTQ4MzAxOTUsImp0aSI6IjRmYTY1MGY2NjYzNDRkNjNiMGI5MWIzNDhlMDQzMWMzIiwidXNlcl9pZCI6IjEwNCJ9.BzbTyJsEWaQvhzICeViqGppUKw9ZFA-urAOtB_WYGEQ",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2NTc2NjA5LCJpYXQiOjE3NTY1NzMwMDksImp0aSI6ImE0MTdlZjI2MTJkYjRkYmRhMWNlYzUyOWIxMGQ4YTU2IiwidXNlcl9pZCI6IjEyIn0.80criZTONJAbgxDnaAg2ktSB2bjMjld-PJa6NVIZArM",
 									"type": "string"
 								}
 							]
@@ -3250,7 +3260,7 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/recommendation-logs/",
+							"raw": "http://localhost:8000/api/recommendation-logs/?page_size=3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -3260,10 +3270,90 @@
 								"api",
 								"recommendation-logs",
 								""
+							],
+							"query": [
+								{
+									"key": "page_size",
+									"value": "3"
+								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/recommendation-logs/?page_size=3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"recommendation-logs",
+										""
+									],
+									"query": [
+										{
+											"key": "page_size",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 30 Aug 2025 16:49:02 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1214"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"OK\",\n    \"data\": [\n        {\n            \"logId\": \"9d1a29c7-3319-4e8c-9280-78bfef352d26\",\n            \"user\": 12,\n            \"style_image\": {\n                \"styleImageId\": \"b289db67-2189-4058-9c76-c54767c7e60a\",\n                \"image_url\": \"http://localhost:8000/media/style_images/input22.jpg\",\n                \"uploaded_at\": \"2025-08-25T07:50:16.337868Z\",\n                \"user\": 12\n            },\n            \"created_at\": \"2025-08-25T07:50:42.636257Z\"\n        },\n        {\n            \"logId\": \"94edd2a1-250a-4d9b-bf08-4b1d206ad59d\",\n            \"user\": 12,\n            \"style_image\": {\n                \"styleImageId\": \"b289db67-2189-4058-9c76-c54767c7e60a\",\n                \"image_url\": \"http://localhost:8000/media/style_images/input22.jpg\",\n                \"uploaded_at\": \"2025-08-25T07:50:16.337868Z\",\n                \"user\": 12\n            },\n            \"created_at\": \"2025-08-25T07:50:50.947744Z\"\n        },\n        {\n            \"logId\": \"764f8083-0a5a-4673-bcb2-27a1d649f37b\",\n            \"user\": 12,\n            \"style_image\": {\n                \"styleImageId\": \"36e8d903-ca65-4a8f-ba0b-232114db9cf5\",\n                \"image_url\": \"http://localhost:8000/media/style_images/input22_3M5NXza.jpg\",\n                \"uploaded_at\": \"2025-08-25T07:54:15.069970Z\",\n                \"user\": 12\n            },\n            \"created_at\": \"2025-08-25T07:54:45.893872Z\"\n        }\n    ],\n    \"count\": 4,\n    \"total_pages\": 2,\n    \"page\": 1,\n    \"page_size\": 3,\n    \"next\": \"http://localhost:8000/api/recommendation-logs/?page=2&page_size=3\",\n    \"prev\": null,\n    \"first\": \"http://localhost:8000/api/recommendation-logs/?page=1&page_size=3\",\n    \"last\": \"http://localhost:8000/api/recommendation-logs/?page=2&page_size=3\"\n}"
+						}
+					]
 				},
 				{
 					"name": "get recommendation log by id",
@@ -3276,7 +3366,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0MDY3Njg4LCJpYXQiOjE3NTQwNjQwODgsImp0aSI6ImE2YjQ1YzdhOTRlMjQwNDI4MDU1OTYwYzMyNDc4Y2YxIiwidXNlcl9pZCI6IjIifQ.75-PFmBAF4NSwhiUFg90epTKm7m_-JWKst63wh6rkbk",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2NTc1NTg1LCJpYXQiOjE3NTY1NzE5ODUsImp0aSI6ImNhMzcxODJiOWI2ZDQwYTY5MzU5Zjc2OTBmODQzZWM2IiwidXNlcl9pZCI6IjEyIn0.27BM8sOfYyrBvqkiCo3Vz_falQUxQts_AAeGNUiFWs4",
 									"type": "string"
 								}
 							]
@@ -3288,7 +3378,7 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/recommendation-logs/1/",
+							"raw": "http://localhost:8000/api/recommendation-logs/9d1a29c7-3319-4e8c-9280-78bfef352d26/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -3297,12 +3387,81 @@
 							"path": [
 								"api",
 								"recommendation-logs",
-								"1",
+								"9d1a29c7-3319-4e8c-9280-78bfef352d26",
 								""
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "sucecss",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/recommendation-logs/9d1a29c7-3319-4e8c-9280-78bfef352d26/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"recommendation-logs",
+										"9d1a29c7-3319-4e8c-9280-78bfef352d26",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 30 Aug 2025 16:49:40 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "5593"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": null,\n    \"data\": {\n        \"logId\": \"9d1a29c7-3319-4e8c-9280-78bfef352d26\",\n        \"user\": 12,\n        \"recommended_products\": [\n            {\n                \"productId\": \"65431967-7955-4fca-aa3d-65921f1f5d34\",\n                \"name\": \"Maximize distributed channels\",\n                \"base_price\": \"13.04\",\n                \"images\": [\n                    {\n                        \"id\": \"6a086f00-0353-4586-847f-b9e7f83e0a10\",\n                        \"image\": \"http://localhost:8000/media/products/fake_image_65431967-7955-4fca-aa3d-65921f1f5d34_0.jpg\",\n                        \"alt_text\": \"Image 1 for Maximize distributed channels\"\n                    },\n                    {\n                        \"id\": \"33b5ff9e-7354-4be9-8b9c-87d43ab641d5\",\n                        \"image\": \"http://localhost:8000/media/products/fake_image_65431967-7955-4fca-aa3d-65921f1f5d34_1.jpg\",\n                        \"alt_text\": \"Image 2 for Maximize distributed channels\"\n                    }\n                ]\n            },\n            {\n                \"productId\": \"565af540-54c0-476a-be44-24620edd9c9e\",\n                \"name\": \"Morph robust bandwidth\",\n                \"base_price\": \"124.56\",\n                \"images\": [\n                    {\n                        \"id\": \"7ba4bbde-39f9-49ba-8dd3-fe5f99fd24c1\",\n                        \"image\": \"http://localhost:8000/media/products/fake_image_565af540-54c0-476a-be44-24620edd9c9e_0.jpg\",\n                        \"alt_text\": \"Image 1 for Morph robust bandwidth\"\n                    },\n                    {\n                        \"id\": \"1f91f50a-591e-4a2e-8739-e99ae298550b\",\n                        \"image\": \"http://localhost:8000/media/products/fake_image_565af540-54c0-476a-be44-24620edd9c9e_1.jpg\",\n                        \"alt_text\": \"Image 2 for Morph robust bandwidth\"\n                    },\n                    {\n                        \"id\": \"eea454df-b809-498c-b6aa-1dcdcf911bfe\",\n                        \"image\": \"http://localhost:8000/media/products/fake_image_565af540-54c0-476a-be44-24620edd9c9e_2.jpg\",\n                        \"alt_text\": \"Image 3 for Morph robust bandwidth\"\n                    }\n                ]\n            },\n            {\n                \"productId\": \"7eb1dfd7-4ac8-46a8-8e98-e30128704010\",\n                \"name\": \"Utilize turn-key networks\",\n                \"base_price\": \"60.41\",\n                \"images\": [\n                    {\n                        \"id\": \"1ac9cff3-33a8-4fa1-af1d-26b1b7bfbcb9\",\n                        \"image\": \"http://localhost:8000/media/products/fake_image_7eb1dfd7-4ac8-46a8-8e98-e30128704010_0.jpg\",\n                        \"alt_text\": \"Image 1 for Utilize turn-key networks\"\n                    },\n                    {\n                        \"id\": \"f9d80d50-db19-41e4-8b6b-de35a26fe726\",\n                        \"image\": \"http://localhost:8000/media/products/fake_image_7eb1dfd7-4ac8-46a8-8e98-e30128704010_1.jpg\",\n                        \"alt_text\": \"Image 2 for Utilize turn-key networks\"\n                    }\n                ]\n            },\n            {\n                \"productId\": \"dc0336d2-b293-4895-8f94-c8e5b522fde0\",\n                \"name\": \"Iterate proactive web-readiness\",\n                \"base_price\": \"72.70\",\n                \"images\": [\n                    {\n                        \"id\": \"6a375804-0381-43c8-8a3c-925d3382a9a4\",\n                        \"image\": \"http://localhost:8000/media/products/fake_image_dc0336d2-b293-4895-8f94-c8e5b522fde0_0.jpg\",\n                        \"alt_text\": \"Image 1 for Iterate proactive web-readiness\"\n                    },\n                    {\n                        \"id\": \"9b83da80-91ab-4e7d-aac7-4c5268ff716f\",\n                        \"image\": \"http://localhost:8000/media/products/fake_image_dc0336d2-b293-4895-8f94-c8e5b522fde0_1.jpg\",\n                        \"alt_text\": \"Image 2 for Iterate proactive web-readiness\"\n                    },\n                    {\n                        \"id\": \"a65f05fa-f6da-45f1-a0af-80d13f62e4e8\",\n                        \"image\": \"http://localhost:8000/media/products/fake_image_dc0336d2-b293-4895-8f94-c8e5b522fde0_2.jpg\",\n                        \"alt_text\": \"Image 3 for Iterate proactive web-readiness\"\n                    }\n                ]\n            },\n            {\n                \"productId\": \"1c566b9e-cea8-488b-99c1-92d638f55437\",\n                \"name\": \"Reinvent bleeding-edge mindshare\",\n                \"base_price\": \"65.16\",\n                \"images\": [\n                    {\n                        \"id\": \"1efed749-686c-4794-91c3-976527d8e526\",\n                        \"image\": \"http://localhost:8000/media/products/fake_image_1c566b9e-cea8-488b-99c1-92d638f55437_0.jpg\",\n                        \"alt_text\": \"Image 1 for Reinvent bleeding-edge mindshare\"\n                    },\n                    {\n                        \"id\": \"dfc80ded-e842-4828-9292-da6c3abed0ef\",\n                        \"image\": \"http://localhost:8000/media/products/fake_image_1c566b9e-cea8-488b-99c1-92d638f55437_1.jpg\",\n                        \"alt_text\": \"Image 2 for Reinvent bleeding-edge mindshare\"\n                    },\n                    {\n                        \"id\": \"4739aaed-b535-4645-8829-92d212544284\",\n                        \"image\": \"http://localhost:8000/media/products/fake_image_1c566b9e-cea8-488b-99c1-92d638f55437_2.jpg\",\n                        \"alt_text\": \"Image 3 for Reinvent bleeding-edge mindshare\"\n                    }\n                ]\n            },\n            {\n                \"productId\": \"d2d22756-e366-44c3-961f-de416f09a28f\",\n                \"name\": \"Utilize customized experiences\",\n                \"base_price\": \"189.70\",\n                \"images\": [\n                    {\n                        \"id\": \"e122164b-ed6b-4276-8222-a09bd5923b6e\",\n                        \"image\": \"http://localhost:8000/media/products/fake_image_d2d22756-e366-44c3-961f-de416f09a28f_0.jpg\",\n                        \"alt_text\": \"Image 1 for Utilize customized experiences\"\n                    },\n                    {\n                        \"id\": \"4b49554d-6c64-4fec-b4a6-5098e2daa9cb\",\n                        \"image\": \"http://localhost:8000/media/products/fake_image_d2d22756-e366-44c3-961f-de416f09a28f_1.jpg\",\n                        \"alt_text\": \"Image 2 for Utilize customized experiences\"\n                    }\n                ]\n            },\n            {\n                \"productId\": \"aeb34e19-8054-493f-b037-0f35964c4588\",\n                \"name\": \"Orchestrate granular relationships\",\n                \"base_price\": \"182.55\",\n                \"images\": [\n                    {\n                        \"id\": \"00856f7a-6084-4b33-afe9-0f9a5b072ac1\",\n                        \"image\": \"http://localhost:8000/media/products/fake_image_aeb34e19-8054-493f-b037-0f35964c4588_0.jpg\",\n                        \"alt_text\": \"Image 1 for Orchestrate granular relationships\"\n                    },\n                    {\n                        \"id\": \"8d6f964d-5d05-419e-b0d1-6f691b79cae4\",\n                        \"image\": \"http://localhost:8000/media/products/fake_image_aeb34e19-8054-493f-b037-0f35964c4588_1.jpg\",\n                        \"alt_text\": \"Image 2 for Orchestrate granular relationships\"\n                    }\n                ]\n            },\n            {\n                \"productId\": \"a5bb881c-f0fd-481c-8a0c-a4cc700309fa\",\n                \"name\": \"Repurpose next-generation e-markets\",\n                \"base_price\": \"181.62\",\n                \"images\": [\n                    {\n                        \"id\": \"2bc7bb47-8038-4879-ac2e-9c0b43e477e5\",\n                        \"image\": \"http://localhost:8000/media/products/fake_image_a5bb881c-f0fd-481c-8a0c-a4cc700309fa_0.jpg\",\n                        \"alt_text\": \"Image 1 for Repurpose next-generation e-markets\"\n                    }\n                ]\n            },\n            {\n                \"productId\": \"ce43de71-776e-4c9e-bc28-d646100358d7\",\n                \"name\": \"Unleash bleeding-edge relationships\",\n                \"base_price\": \"125.08\",\n                \"images\": [\n                    {\n                        \"id\": \"8218a136-ccbd-48f5-8db8-65722c433cc2\",\n                        \"image\": \"http://localhost:8000/media/products/fake_image_ce43de71-776e-4c9e-bc28-d646100358d7_0.jpg\",\n                        \"alt_text\": \"Image 1 for Unleash bleeding-edge relationships\"\n                    },\n                    {\n                        \"id\": \"ca378650-2d38-4f3a-b163-dfa658ed00ca\",\n                        \"image\": \"http://localhost:8000/media/products/fake_image_ce43de71-776e-4c9e-bc28-d646100358d7_1.jpg\",\n                        \"alt_text\": \"Image 2 for Unleash bleeding-edge relationships\"\n                    }\n                ]\n            },\n            {\n                \"productId\": \"7fea0ddb-828d-4d64-bd65-f417da95b5b1\",\n                \"name\": \"Test Product\",\n                \"base_price\": \"99.99\",\n                \"images\": [\n                    {\n                        \"id\": \"e9e9572c-dcd4-4c42-b836-0d85fcab8cb3\",\n                        \"image\": \"http://localhost:8000/media/products/test_image.jpg\",\n                        \"alt_text\": \"Test image\"\n                    }\n                ]\n            }\n        ],\n        \"created_at\": \"2025-08-25T07:50:42.636257Z\"\n    }\n}"
+						}
+					]
 				},
 				{
 					"name": "get user feedbacks",
@@ -3315,7 +3474,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0MDczMTI1LCJpYXQiOjE3NTQwNjk1MjUsImp0aSI6IjdmNWNlYzZiNjhiZDRmMDM5OTcyYzEyOTlhMDg0ZTYyIiwidXNlcl9pZCI6IjgxIn0.R_uaz_vzonlvW6nihz9-wWZZ93GYJpU-4B7VoqrK_S0",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2NTc1NTg1LCJpYXQiOjE3NTY1NzE5ODUsImp0aSI6ImNhMzcxODJiOWI2ZDQwYTY5MzU5Zjc2OTBmODQzZWM2IiwidXNlcl9pZCI6IjEyIn0.27BM8sOfYyrBvqkiCo3Vz_falQUxQts_AAeGNUiFWs4",
 									"type": "string"
 								}
 							]
@@ -3327,7 +3486,7 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/feedbacks/",
+							"raw": "http://localhost:8000/api/feedbacks/?page_size=3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -3337,10 +3496,90 @@
 								"api",
 								"feedbacks",
 								""
+							],
+							"query": [
+								{
+									"key": "page_size",
+									"value": "3"
+								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/feedbacks/?page_size=3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"feedbacks",
+										""
+									],
+									"query": [
+										{
+											"key": "page_size",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 30 Aug 2025 17:05:45 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "612"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"OK\",\n    \"data\": [\n        {\n            \"feedbackId\": \"32495329-d1de-4723-b5bf-bc49011c24b1\",\n            \"log\": {\n                \"logId\": \"9d1a29c7-3319-4e8c-9280-78bfef352d26\",\n                \"user\": 12,\n                \"style_image\": {\n                    \"styleImageId\": \"b289db67-2189-4058-9c76-c54767c7e60a\",\n                    \"image_url\": \"http://localhost:8000/media/style_images/input22.jpg\",\n                    \"uploaded_at\": \"2025-08-25T07:50:16.337868Z\",\n                    \"user\": 12\n                },\n                \"created_at\": \"2025-08-25T07:50:42.636257Z\"\n            },\n            \"is_good\": true\n        }\n    ],\n    \"count\": 1,\n    \"total_pages\": 1,\n    \"page\": 1,\n    \"page_size\": 3,\n    \"next\": null,\n    \"prev\": null,\n    \"first\": \"http://localhost:8000/api/feedbacks/?page=1&page_size=3\",\n    \"last\": \"http://localhost:8000/api/feedbacks/?page=1&page_size=3\"\n}"
+						}
+					]
 				},
 				{
 					"name": "upload style image",
@@ -3350,7 +3589,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0ODMzNzk1LCJpYXQiOjE3NTQ4MzAxOTUsImp0aSI6IjRmYTY1MGY2NjYzNDRkNjNiMGI5MWIzNDhlMDQzMWMzIiwidXNlcl9pZCI6IjEwNCJ9.BzbTyJsEWaQvhzICeViqGppUKw9ZFA-urAOtB_WYGEQ",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2MDQzNTQ5LCJpYXQiOjE3NTYwMzk5NDksImp0aSI6IjE5ZGQxNWEwOWY4MzQwNjU4NDg5NDNiNDYzYTRkMmQ4IiwidXNlcl9pZCI6IjEyIn0.4NGaWf4dD66V5vHFDuTvh4ARhIR-TYNe_UDBRXlS01w",
 									"type": "string"
 								}
 							]
@@ -3363,7 +3602,7 @@
 								{
 									"key": "image_url",
 									"type": "file",
-									"src": "/C:/Users/Mahmoud/Desktop/mmfashion/images/input2.jpg"
+									"src": "/C:/Users/Mahmoud/Desktop/clothing-segmentation/images2/07_1_front.jpg"
 								}
 							]
 						},
@@ -3454,6 +3693,315 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"success\": true,\n    \"message\": null,\n    \"data\": {\n        \"styleImageId\": \"db0f3758-48d2-4beb-a1c5-44d6726a9935\",\n        \"image_url\": \"http://localhost:8000/media/style_images/input2_DYZktzi.jpg\",\n        \"uploaded_at\": \"2025-08-10T13:10:31.503371Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "give a feedback to a recommendation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2NTc1NTg1LCJpYXQiOjE3NTY1NzE5ODUsImp0aSI6ImNhMzcxODJiOWI2ZDQwYTY5MzU5Zjc2OTBmODQzZWM2IiwidXNlcl9pZCI6IjEyIn0.27BM8sOfYyrBvqkiCo3Vz_falQUxQts_AAeGNUiFWs4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "log",
+									"value": "9d1a29c7-3319-4e8c-9280-78bfef352d26",
+									"type": "text"
+								},
+								{
+									"key": "is_good",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/feedbacks/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"feedbacks",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "log",
+											"value": "9d1a29c7-3319-4e8c-9280-78bfef352d26",
+											"type": "text"
+										},
+										{
+											"key": "is_good",
+											"value": "true",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/feedbacks/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"feedbacks",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 30 Aug 2025 16:57:14 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "152"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": null,\n    \"data\": {\n        \"feedbackId\": \"32495329-d1de-4723-b5bf-bc49011c24b1\",\n        \"log\": \"9d1a29c7-3319-4e8c-9280-78bfef352d26\",\n        \"is_good\": true\n    }\n}"
+						},
+						{
+							"name": "failed (feedback already exists)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "log",
+											"value": "9d1a29c7-3319-4e8c-9280-78bfef352d26",
+											"type": "text"
+										},
+										{
+											"key": "is_good",
+											"value": "true",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/feedbacks/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"feedbacks",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 30 Aug 2025 16:57:30 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "57"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Request failed.\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "get feedback by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2NTc1NTg1LCJpYXQiOjE3NTY1NzE5ODUsImp0aSI6ImNhMzcxODJiOWI2ZDQwYTY5MzU5Zjc2OTBmODQzZWM2IiwidXNlcl9pZCI6IjEyIn0.27BM8sOfYyrBvqkiCo3Vz_falQUxQts_AAeGNUiFWs4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/feedbacks/32495329-d1de-4723-b5bf-bc49011c24b1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"feedbacks",
+								"32495329-d1de-4723-b5bf-bc49011c24b1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/feedbacks/32495329-d1de-4723-b5bf-bc49011c24b1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"feedbacks",
+										"32495329-d1de-4723-b5bf-bc49011c24b1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 30 Aug 2025 17:06:54 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "406"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": null,\n    \"data\": {\n        \"feedbackId\": \"32495329-d1de-4723-b5bf-bc49011c24b1\",\n        \"log\": {\n            \"logId\": \"9d1a29c7-3319-4e8c-9280-78bfef352d26\",\n            \"user\": 12,\n            \"style_image\": {\n                \"styleImageId\": \"b289db67-2189-4058-9c76-c54767c7e60a\",\n                \"image_url\": \"http://localhost:8000/media/style_images/input22.jpg\",\n                \"uploaded_at\": \"2025-08-25T07:50:16.337868Z\",\n                \"user\": 12\n            },\n            \"created_at\": \"2025-08-25T07:50:42.636257Z\"\n        },\n        \"is_good\": true\n    }\n}"
 						}
 					]
 				}
