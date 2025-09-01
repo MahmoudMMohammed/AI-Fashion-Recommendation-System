@@ -1,3 +1,5 @@
+import io
+
 import cv2
 from celery import shared_task
 from django.core.files.base import ContentFile
@@ -5,14 +7,16 @@ from django.db import transaction
 from users.notifications.tasks import send_notification_task
 
 from .models import StyleImage, ImageSegment, Category
-from .ai_services.mmfashion_detector import MMFashionDetector
-from .ai_services.fast_sam_segmenter import FastSAMSegmenter
+# from .ai_services.mmfashion_detector import MMFashionDetector
+# from .ai_services.fast_sam_segmenter import FastSAMSegmenter
 
 from .ai_services.style_embedding import process_style_embedding
+from .ai_services.segformer_segmenter import SegFormerSegmenter
 
 # Initialize models once when the worker starts, not for every task.
-detector = MMFashionDetector()
-segmenter = FastSAMSegmenter()
+# detector = MMFashionDetector()
+# segmenter = FastSAMSegmenter()
+segmenter = SegFormerSegmenter()
 
 
 @shared_task
@@ -33,44 +37,48 @@ def process_style_image_segmentation(style_image_id):
 
     image_path = style_image.image_url.path
 
-    # Stage 1: Detect all categories in the image
-    detected_categories = detector.detect_categories(image_path)
-    if not detected_categories:
-        return f"No categories detected for StyleImage {style_image_id}."
+    segmented_images = segmenter.run_segmentation(image_path)
 
-    # Stage 2: For each category, segment the object and save it
-    for category_name in detected_categories:
-        segment_image_np = segmenter.segment_object(image_path, category_name)
+    if not segmented_images:
+        return f"No valid segments found for StyleImage {style_image_id}."
 
-        if segment_image_np is not None:
-            try:
-                category_obj = Category.objects.get(name__iexact=category_name)
-            except Category.DoesNotExist:
-                print(f"Category '{category_name}' not found in database. Skipping segment.")
-                continue
+    saved_categories = []
+    for category_name, segment_pil_image in segmented_images.items():
+        try:
+            # Look up the category in our database. The names from the service are already lowercase.
+            category_obj = Category.objects.get(name__iexact=category_name)
+        except Category.DoesNotExist:
+            print(f"WARNING: Category '{category_name}' found by AI but does not exist in the database. Skipping.")
+            continue
 
-            _, buffer = cv2.imencode('.jpg', segment_image_np)
-            image_content = ContentFile(buffer.tobytes())
+        # --- Save the PIL Image to the ImageField ---
+        # Create a new ImageSegment instance
+        segment = ImageSegment.objects.create(
+            style_image=style_image,
+            category_type=category_obj
+        )
 
-            # Use a transaction to ensure atomicity
-            with transaction.atomic():
-                segment = ImageSegment.objects.create(
-                    style_image=style_image,
-                    category_type=category_obj
-                )
-                segment_filename = f"{style_image_id}_{category_name}_segment.jpg"
-                segment.image_url.save(segment_filename, image_content, save=True)
+        # Convert PIL RGBA image to bytes in-memory
+        buffer = io.BytesIO()
+        segment_pil_image.save(buffer, format='PNG')  # Save as PNG to keep transparency
+        image_content = ContentFile(buffer.getvalue())
 
-            # --- TRIGGER THE EMBEDDING TASK ---
-            # Call the new task to process the created segment
-            process_style_embedding.delay(segment.segmentId)
-            print(f"Triggered embedding task for segment ID: {segment.segmentId}")
+        # Save the content to the ImageField
+        segment_filename = f"{style_image_id}_{category_name}.png"
+        segment.image_url.save(segment_filename, image_content, save=True)
+
+        saved_categories.append(category_name)
+
+        # --- TRIGGER THE EMBEDDING TASK ---
+        # Call the new task to process the created segment
+        process_style_embedding.delay(segment.segmentId)
+        print(f"Triggered embedding task for segment ID: {segment.segmentId}")
 
     send_notification_task.delay(
         user_id=user_id,
         title="Results are ready!",
         message=f"We found 10 products that fit your style.",
-        payload={"style_image": style_image},
+        payload={"style_image": str(style_image)},
     )
 
-    return f"Segmentation complete for StyleImage {style_image_id}. Detected: {detected_categories}"
+    return f"Segmentation complete for StyleImage {style_image_id}. Saved segments for: {saved_categories}"
