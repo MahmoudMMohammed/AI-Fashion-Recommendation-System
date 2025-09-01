@@ -1,9 +1,13 @@
+import csv
+import os
 import random
 from django.core.management.base import BaseCommand
+from django.core.files.base import ContentFile
 from django.db import transaction
 from faker import Faker
 import numpy as np
 
+from fashionRecommendationSystem import settings
 from recommendations.models import ImageSegment, StyleImage
 # Import all your models
 from users.models import User, UserProfile
@@ -14,8 +18,6 @@ from wallet.models import Wallet
 # --- Configuration ---
 NUM_USERS = 10
 NUM_SIZES = 4
-NUM_PRODUCTS = 50
-NUM_IMAGES_PER_PRODUCT = 3
 NUM_ORDERS_PER_USER = 3
 MAX_ITEMS_PER_ORDER = 5
 EMBEDDING_DIM = 2048
@@ -60,10 +62,11 @@ class Command(BaseCommand):
             categories.append(category)
 
         sizes = []
-        size_labels = ['S', 'M', 'L', 'XL']
+        size_labels = ['S', 'M', 'L', 'XL', 'One Size']
         for label in size_labels:
             size, _ = ProductSize.objects.get_or_create(label=label)
             sizes.append(size)
+        self.stdout.write(self.style.SUCCESS(f'{len(sizes)} sizes ensured in database.'))
 
         # --- 3. Create Users ---
         self.stdout.write('Creating Users, Profiles, and Wallets...')
@@ -100,56 +103,101 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS(f'{User.objects.count()} users created.'))
 
         # --- 4. Create Products and their Images ---
-        self.stdout.write('Creating Products and Product Images...')
-        products = []
-        for _ in range(NUM_PRODUCTS):
-            # Create the Product instance first
-            fake_embedding = np.random.rand(EMBEDDING_DIM).tolist()
+        self.stdout.write('Seeding products from CSV file...')
+        # Define the path to the dataset relative to the project's BASE_DIR
+        dataset_path = os.path.join(settings.BASE_DIR, 'dataset')
+        csv_file_path = os.path.join(dataset_path, 'inventory_subset.csv')
+        images_dir_path = os.path.join(dataset_path, 'images')
 
-            product = Product.objects.create(
-                sku=faker.ean(length=13),
-                name=faker.bs().capitalize(),
-                description=faker.paragraph(nb_sentences=5),
-                base_price=faker.pydecimal(left_digits=3, right_digits=2, positive=True, min_value=10, max_value=200),
-                discount_percent=random.choice([0, 10, 15, 20, 25]),
-                stock_quantity=random.randint(0, 100),
-                embedding=fake_embedding
-            )
+        product_count = 0
+        try:
+            with open(csv_file_path, mode='r', encoding='utf-8') as csv_file:
+                reader = csv.DictReader(csv_file)
+                for row in reader:
+                    # --- Find or Create the Category ---
+                    category_name = row['category'].strip().capitalize()
+                    if not category_name:
+                        self.stdout.write(self.style.WARNING(f"Skipping row with empty category. SKU: {row['sku']}"))
+                        continue
 
-            # --- NEW LOGIC: Create associated ProductImage objects ---
-            for i in range(random.randint(1, NUM_IMAGES_PER_PRODUCT)):
-                # We assign a fake path. Django won't try to access it unless you
-                # render it in a template or API response that hits the filesystem.
-                # For DB seeding, this is sufficient and fast.
-                fake_image_path = f"products/fake_image_{product.productId}_{i}.jpg"
-                ProductImage.objects.create(
-                    product=product,
-                    image=fake_image_path,
-                    alt_text=f"Image {i + 1} for {product.name}"
-                )
+                    category, created = Category.objects.get_or_create(
+                        name=category_name,
+                        defaults={'description': f'A collection of {category_name} items.'}
+                    )
+                    if created:
+                        self.stdout.write(f"  Created new category: {category_name}")
 
-            # Add Many-to-Many relationships
-            product.categories.set(random.sample(categories, k=random.randint(1, 3)))
-            product.sizes.set(random.sample(sizes, k=random.randint(1, len(sizes))))
-            products.append(product)
+                    # --- Create the Product ---
+                    product, created = Product.objects.get_or_create(
+                        sku=row['sku'].strip(),
+                        defaults={
+                            'name': row['name'].strip(),
+                            'base_price': row['price'].strip(),
+                            'gender': row['gender'].strip(),
+                            # Add fake data for other fields
+                            'description': faker.paragraph(nb_sentences=5),
+                            'discount_percent': random.choice([0, 5, 10, 15, 20]),
+                            'stock_quantity': random.randint(10, 100)
+                            # 'embedding' is left null by default
+                        }
+                    )
 
-        self.stdout.write(self.style.SUCCESS(f'{NUM_PRODUCTS} products created with images.'))
+                    if not created:
+                        self.stdout.write(
+                            self.style.WARNING(f"Product with SKU {product.sku} already exists. Skipping."))
+                        continue
 
-        # --- 5. Create Orders and OrderItems ---
-        self.stdout.write('Creating Orders...')
-        for user in users:  # Use the list of non-admin users for orders
-            for _ in range(NUM_ORDERS_PER_USER):
-                order = Order.objects.create(user=user, status=random.choice([s[0] for s in Order.Status.choices]))
+                    # --- Attach Category and Sizes ---
+                    product.categories.add(category)
+                    product.sizes.set(random.sample(sizes, k=random.randint(1, len(sizes))))
 
-                num_items = random.randint(1, MAX_ITEMS_PER_ORDER)
-                order_products = random.sample(products, k=num_items)
+                    # --- Find and Attach the Image ---
+                    image_filename = row['image'].split('/')[-1]
+                    image_path = os.path.join(images_dir_path, image_filename)
 
-                for product in order_products:
-                    if product.is_in_stock(1):
-                        OrderItem.objects.create(
-                            order=order, product=product,
-                            quantity=random.randint(1, 3), unit_price=product.get_final_price()
+                    if os.path.exists(image_path):
+                        # Create the ProductImage instance first, without the image file.
+                        product_image = ProductImage.objects.create(
+                            product=product,
+                            alt_text=f"Image for {product.name}"
                         )
 
-        self.stdout.write(self.style.SUCCESS('Orders created.'))
+                        # Open the file and read its content.
+                        with open(image_path, 'rb') as img_f:
+                            image_content = img_f.read()
+
+                        # Wrap the content in a ContentFile object.
+                        django_content_file = ContentFile(image_content)
+
+                        # Call the save() method on the ImageField of the instance.
+                        # This is the correct way to do it.
+                        product_image.image.save(image_filename, django_content_file, save=True)
+                    else:
+                        self.stdout.write(self.style.WARNING(f"Image not found for SKU {product.sku}: {image_path}"))
+
+                    product_count += 1
+
+        except FileNotFoundError:
+            self.stdout.write(self.style.ERROR(f"Error: The file was not found at {csv_file_path}"))
+            self.stdout.write(self.style.ERROR("Please make sure the 'dataset' directory is in your project root."))
+            return  # Exit the command
+        self.stdout.write(self.style.SUCCESS(f'Successfully seeded {product_count} products from the CSV.'))
+
+        # # --- 5. Create Orders and OrderItems ---
+        # self.stdout.write('Creating Orders...')
+        # for user in users:  # Use the list of non-admin users for orders
+        #     for _ in range(NUM_ORDERS_PER_USER):
+        #         order = Order.objects.create(user=user, status=random.choice([s[0] for s in Order.Status.choices]))
+        #
+        #         num_items = random.randint(1, MAX_ITEMS_PER_ORDER)
+        #         order_products = random.sample(products, k=num_items)
+        #
+        #         for product in order_products:
+        #             if product.is_in_stock(1):
+        #                 OrderItem.objects.create(
+        #                     order=order, product=product,
+        #                     quantity=random.randint(1, 3), unit_price=product.get_final_price()
+        #                 )
+        #
+        # self.stdout.write(self.style.SUCCESS('Orders created.'))
         self.stdout.write(self.style.SUCCESS('Database seeding complete!'))

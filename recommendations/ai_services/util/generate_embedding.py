@@ -34,7 +34,8 @@ GOOGLE_DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1o1HGE9zSeLqrn
 # Available weights files in the Google Drive folder
 AVAILABLE_WEIGHTS = {
     'weights.10.weights.h5': '1o1HGE9zSeLqrnWDcD-JA7acACnXiQYo8',
-    'weights.19.weights.h5': '1o1HGE9zSeLqrnWDcD-JA7acACnXiQYo8'
+    'weights.19.weights.h5': '1o1HGE9zSeLqrnWDcD-JA7acACnXiQYo8',
+    'weights.27.weights.h5': '1o1HGE9zSeLqrnWDcD-JA7acACnXiQYo8',
 }
 
 def download_weights_from_drive(weights_filename, target_path):

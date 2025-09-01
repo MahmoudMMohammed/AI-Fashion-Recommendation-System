@@ -90,7 +90,7 @@ class WalletAdmin(admin.ModelAdmin):
             color = '#e74c3c'  # Red for zero/negative balance
         
         return format_html(
-            '<span style="color: {}; font-weight: bold; font-size: 14px;">${:.2f}</span>',
+            '<span style="color: {}; font-weight: bold; font-size: 14px;">${}</span>',
             color, obj.balance
         )
     
@@ -151,7 +151,7 @@ class WalletAdmin(admin.ModelAdmin):
                     <small style="color: #666;">{transaction.created_at.strftime("%Y-%m-%d %H:%M")}</small>
                 </div>
                 <div style="text-align: right;">
-                    <span style="color: {color}; font-weight: bold;">{sign}${transaction.amount:.2f}</span><br/>
+                    <span style="color: {color}; font-weight: bold;">{sign}${transaction.amount}</span><br/>
                     <small style="color: #999;">{transaction.reference[:30]}{'...' if len(transaction.reference) > 30 else ''}</small>
                 </div>
             </div>
@@ -182,15 +182,15 @@ class WalletAdmin(admin.ModelAdmin):
             <h4 style="margin-top: 0; color: #333;">Wallet Analytics</h4>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                 <div style="background: white; padding: 10px; border-radius: 4px; text-align: center;">
-                    <div style="color: #27ae60; font-size: 18px; font-weight: bold;">${total_deposits:.2f}</div>
+                    <div style="color: #27ae60; font-size: 18px; font-weight: bold;">${total_deposits}</div>
                     <div style="color: #666; font-size: 12px;">Total Deposits</div>
                 </div>
                 <div style="background: white; padding: 10px; border-radius: 4px; text-align: center;">
-                    <div style="color: #e74c3c; font-size: 18px; font-weight: bold;">${total_purchases:.2f}</div>
+                    <div style="color: #e74c3c; font-size: 18px; font-weight: bold;">${total_purchases}</div>
                     <div style="color: #666; font-size: 12px;">Total Purchases</div>
                 </div>
                 <div style="background: white; padding: 10px; border-radius: 4px; text-align: center;">
-                    <div style="color: #3498db; font-size: 18px; font-weight: bold;">${total_refunds:.2f}</div>
+                    <div style="color: #3498db; font-size: 18px; font-weight: bold;">${total_refunds}</div>
                     <div style="color: #666; font-size: 12px;">Total Refunds</div>
                 </div>
                 <div style="background: white; padding: 10px; border-radius: 4px; text-align: center;">
@@ -200,7 +200,7 @@ class WalletAdmin(admin.ModelAdmin):
             </div>
             <div style="margin-top: 15px; padding: 10px; background: white; border-radius: 4px; text-align: center;">
                 <div style="color: #333; font-size: 16px; font-weight: bold;">Net Activity</div>
-                <div style="color: #666; font-size: 14px;">${total_deposits + total_refunds - total_purchases:.2f}</div>
+                <div style="color: #666; font-size: 14px;">${total_deposits + total_refunds - total_purchases}</div>
             </div>
         </div>
         '''

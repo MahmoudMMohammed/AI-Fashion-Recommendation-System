@@ -44,7 +44,26 @@ CREATE EXTENSION IF NOT EXISTS vector;
 
 ---
 
-### 3. Set Up the Django Project
+### 3. Download Dataset
+
+* RAR: [dataset](https://drive.google.com/file/d/1ate1WjsvVbyKVppxnoJpmtBZ7T11aHn5/view?usp=sharing)
+  * Extract the RAR in the project root directory, So you get:
+     ```
+    your_project/
+    |-- dataset/
+    |   |-- inventory_subset.csv
+    |   |-- images/
+    |   |   |-- 25155.jpg
+    |   |   |-- 31922.jpg
+    |   |   |-- ... etc.
+    |-- manage.py
+    |-- style_recommender/
+    |-- users/
+    |-- ... other apps
+    ```
+---
+
+### 4. Set Up the Django Project
 
 Open the project directory in your terminal and run:
 

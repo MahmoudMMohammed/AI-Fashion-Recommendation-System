@@ -29,7 +29,8 @@ GOOGLE_DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1o1HGE9zSeLqrn
 # Available weights files in the Google Drive folder
 AVAILABLE_WEIGHTS = {
     'weights.10.weights.h5': '1o1HGE9zSeLqrnWDcD-JA7acACnXiQYo8',
-    'weights.19.weights.h5': '1o1HGE9zSeLqrnWDcD-JA7acACnXiQYo8'
+    'weights.19.weights.h5': '1o1HGE9zSeLqrnWDcD-JA7acACnXiQYo8',
+    'weights.27.weights.h5': '1o1HGE9zSeLqrnWDcD-JA7acACnXiQYo8'
 }
 
 # Add Style2Vec core to path
@@ -118,7 +119,7 @@ class Style2VecSingleton:
             model_weights_path = os.path.join(
                 os.path.dirname(__file__), 
                 '..', '..', 'ai_models', 
-                'weights.19.weights.h5'
+                'weights.27.weights.h5'
             )
             
             # Ensure weights exist, download from Google Drive if needed

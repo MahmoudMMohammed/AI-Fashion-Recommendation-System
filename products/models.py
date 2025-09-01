@@ -43,6 +43,7 @@ class Product(models.Model):
     discount_percent = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     stock_quantity = models.IntegerField()
     embedding = VectorField(dimensions=2048, null=True, blank=True)
+    gender = models.CharField(max_length=10, null=True)
 
     categories = models.ManyToManyField(Category, related_name='products')
     sizes = models.ManyToManyField(ProductSize, related_name='products')
