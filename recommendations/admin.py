@@ -262,7 +262,7 @@ class RecommendationLogAdmin(admin.ModelAdmin):
         'style_image__styleImageId', 'recommended_products__name'
     )
     autocomplete_fields = ['user', 'style_image', 'recommended_products']
-    readonly_fields = ('logId', 'created_at')
+    readonly_fields = ('logId', 'created_at', 'get_recommended_products_detail')
     
     filter_horizontal = ('recommended_products',)
     date_hierarchy = 'created_at'
@@ -270,6 +270,10 @@ class RecommendationLogAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Recommendation Details', {
             'fields': ('user', 'style_image', 'recommended_products')
+        }),
+        ('Recommended Products Details', {
+            'fields': ('get_recommended_products_detail',),
+            'description': 'Detailed view of all recommended products'
         }),
         ('System Info', {
             'fields': ('logId', 'created_at'),
@@ -290,7 +294,54 @@ class RecommendationLogAdmin(admin.ModelAdmin):
     @admin.display(description='Products', ordering='products_count')
     def get_products_count(self, obj):
         count = obj.recommended_products.count()
-        return f"{count} products"
+        if count > 0:
+            # Create a clickable link that shows product details
+            products_list = []
+            for product in obj.recommended_products.all():  # Show all products
+                product_url = reverse('admin:products_product_change', args=[product.productId])
+                products_list.append(f'<div style="margin: 4px 0; padding: 4px 0;">• <a href="{product_url}" target="_blank" style="color: #007cba; text-decoration: none; font-weight: 500;">{product.name}</a></div>')
+            
+            products_html = ''.join(products_list)
+            
+            unique_id = f"products-{obj.logId}"
+            
+            result_html = f'''
+            <style>
+            .product-toggle {{ cursor: pointer; color: #007cba; text-decoration: underline; font-weight: bold; }}
+            .product-toggle:hover {{ color: #005a8b; }}
+            .product-list {{ 
+                background: #ffffff !important; 
+                border: 1px solid #ddd !important; 
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important; 
+            }}
+            [data-theme="dark"] .product-list {{ 
+                background: #2b2b2b !important; 
+                border-color: #444 !important; 
+                color: #fff !important; 
+            }}
+            </style>
+            <div>
+            <span class="product-toggle" onclick="toggleProductList('{unique_id}')">{count} products ▼</span>
+            <div class="product-list" id="{unique_id}" style="display: none; margin-top: 8px; padding: 12px; border-radius: 6px; max-height: 400px; overflow-y: auto; line-height: 1.4;">
+            {products_html}</div>
+            </div>
+            <script>
+            function toggleProductList(id) {{
+                var div = document.getElementById(id);
+                var toggle = div.previousElementSibling;
+                if (div.style.display === "none") {{
+                    div.style.display = "block";
+                    toggle.innerHTML = toggle.innerHTML.replace("▼", "▲");
+                }} else {{
+                    div.style.display = "none";
+                    toggle.innerHTML = toggle.innerHTML.replace("▲", "▼");
+                }}
+            }}
+            </script>
+            '''
+            
+            return mark_safe(result_html)
+        return "0 products"
     
     @admin.display(description='Feedback')
     def get_feedback_summary(self, obj):
@@ -314,6 +365,43 @@ class RecommendationLogAdmin(admin.ModelAdmin):
             '<small>({}/{})</small>',
             color, percentage, positive_feedback, total_feedback
         )
+    
+    @admin.display(description='Recommended Products Details')
+    def get_recommended_products_detail(self, obj):
+        products = obj.recommended_products.all()
+        if not products:
+            return "No products recommended"
+        
+        products_html = '<div style="background: var(--body-bg, #f8f9fa); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color, #ddd);">'
+        products_html += f'<h4 style="margin-top: 0; color: var(--body-fg, #333);">Recommended Products ({products.count()} total)</h4>'
+        
+        for i, product in enumerate(products, 1):
+            product_url = reverse('admin:products_product_change', args=[product.productId])
+            
+            # Get the first product image if available
+            first_image = product.images.first()
+            image_html = ''
+            if first_image and first_image.image:
+                image_html = f'<img src="{first_image.image.url}" width="60" height="60" style="border-radius: 4px; object-fit: cover; margin-right: 10px; border: 1px solid var(--border-color, #ddd);" />'
+            
+            # Product details with better dark mode support
+            products_html += f'''
+            <div style="border: 1px solid var(--border-color, #ddd); margin-bottom: 10px; padding: 12px; border-radius: 6px; background: var(--body-bg, white); display: flex; align-items: center; transition: background-color 0.2s;">
+                {image_html}
+                <div style="flex: 1;">
+                    <div style="font-weight: bold; margin-bottom: 6px;">
+                        <a href="{product_url}" target="_blank" style="color: var(--link-fg, #007cba); text-decoration: none; font-size: 14px;">{i}. {product.name}</a>
+                    </div>
+                    <div style="color: var(--body-quiet-color, #666); font-size: 12px; margin-bottom: 3px;">SKU: {product.sku}</div>
+                    <div style="color: var(--body-quiet-color, #666); font-size: 12px; margin-bottom: 3px;">Price: <span style="font-weight: 600; color: var(--body-fg, #333);">${product.get_final_price():.2f}</span></div>
+                    <div style="color: var(--body-quiet-color, #666); font-size: 12px; margin-bottom: 3px;">Stock: {product.stock_quantity} units</div>
+                    {f'<div style="color: #e74c3c; font-size: 11px; margin-top: 4px; font-weight: 600;">Discount: {product.discount_percent}% off</div>' if product.discount_percent > 0 else ''}
+                </div>
+            </div>
+            '''
+        
+        products_html += '</div>'
+        return mark_safe(products_html)
     
     def get_queryset(self, request):
         qs = super().get_queryset(request)

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'djoser',
+    'django_filters',
 
     "users.apps.UsersConfig",
     "products.apps.ProductsConfig",
@@ -126,9 +127,9 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 20,
 
     "DEFAULT_RENDERER_CLASSES": ["fashionRecommendationSystem.renderers.EnvelopeJSONRenderer"],
-    "EXCEPTION_HANDLER": "fashionRecommendationSystem.exceptions.exception_handler"
+    "EXCEPTION_HANDLER": "fashionRecommendationSystem.exceptions.exception_handler",
 
-
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 REST_FRAMEWORK.update({

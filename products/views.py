@@ -1,13 +1,22 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, filters
 from .models import Product, Category, ProductSize, ProductImage
 from .serializers import ProductSerializer, CategorySerializer, ProductSizeSerializer, ProductImageSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
+from .filters import ProductFilter
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class ProductViewSet(viewsets.ModelViewSet):
     """API endpoint for products."""
     queryset = Product.objects.all().prefetch_related('categories', 'sizes')
     serializer_class = ProductSerializer
+    filterset_class = ProductFilter
+
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['productId', 'name', 'sku', 'description']
+
+    ordering_fields = ['name', 'base_price', 'created_at']
+    ordering = ['-created_at']
 
     def get_permissions(self):
         # Allow anyone to view products (list, retrieve)

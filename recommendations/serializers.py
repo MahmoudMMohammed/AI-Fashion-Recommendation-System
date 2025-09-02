@@ -33,16 +33,25 @@ class RecommendationLogDetailSerializer(serializers.ModelSerializer):
 
 class FeedbackSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    log = RecommendationLogListSerializer(read_only=True)
+
+    # accept a UUID in the incoming payload
+    logId = serializers.PrimaryKeyRelatedField(
+        source="log",  # tell DRF this populates the `log` FK
+        queryset=RecommendationLog.objects.all(),
+        write_only=True
+    )
+    log = RecommendationLogListSerializer(read_only=True)  # keep the nested read-only view
 
     class Meta:
         model = Feedback
-        fields = ['feedbackId', 'log', 'is_good', 'user']
+        fields = ['feedbackId', 'logId', 'log', 'is_good', 'user']
         depth = 1
 
     def validate(self, attrs):
         user = self.context['request'].user
-        log = attrs['log']
+        log = attrs['log']  # `logId` has already been mapped to `log`
         if Feedback.objects.filter(user=user, log=log).exists():
-            raise serializers.ValidationError("You already gave feedback for this recommendation.")
+            raise serializers.ValidationError(
+                "You already gave feedback for this recommendation."
+            )
         return attrs
