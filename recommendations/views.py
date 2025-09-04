@@ -26,7 +26,8 @@ class StyleImageViewSet(viewsets.ModelViewSet):
 
         # --- TRIGGER THE BACKGROUND TASK ---
         # We pass the ID of the object, not the object itself, as it's better for serialization.
-        process_style_image_segmentation.delay(style_image.styleImageId)
+        gender = self.request.data.get('gender')
+        process_style_image_segmentation.delay(style_image.styleImageId, gender)
 
         # The view's job is done. It returns immediately to the user.
         # The Celery worker will handle the rest.

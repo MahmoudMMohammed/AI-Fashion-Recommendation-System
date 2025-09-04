@@ -20,7 +20,7 @@ segmenter = SegFormerSegmenter()
 
 
 @shared_task
-def process_style_image_segmentation(style_image_id):
+def process_style_image_segmentation(style_image_id, gender=None):
     """
     Celery task to perform AI segmentation on a StyleImage.
     """
@@ -71,7 +71,7 @@ def process_style_image_segmentation(style_image_id):
 
         # --- TRIGGER THE EMBEDDING TASK ---
         # Call the new task to process the created segment
-        process_style_embedding.delay(segment.segmentId)
+        process_style_embedding.delay(segment.segmentId, gender)
         print(f"Triggered embedding task for segment ID: {segment.segmentId}")
 
     send_notification_task.delay(

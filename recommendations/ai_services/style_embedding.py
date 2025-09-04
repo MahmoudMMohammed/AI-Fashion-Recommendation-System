@@ -12,7 +12,7 @@ from .recommender_service import get_recommendations
 
 
 @shared_task
-def process_style_embedding(image_segment_id):
+def process_style_embedding(image_segment_id, gender=None):
     """
     Celery task to generate style embedding for an ImageSegment.
     Uses singleton model for better performance - loads once, reuses many times.
@@ -67,8 +67,8 @@ def process_style_embedding(image_segment_id):
                 )
                 print(f"Embedding complete for segment {segment.segmentId}.")
 
-            # Get recommendations
-            recommended_products = get_recommendations(image_segment_id)
+            # Get recommendations (filtered by gender if provided)
+            recommended_products = get_recommendations(image_segment_id, gender=gender)
             print(f"Recommendations found: {[p.name for p in recommended_products]}")
             return f"Embedding complete and recommendations found for segment {segment.segmentId}"
         else:

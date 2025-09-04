@@ -1,8 +1,10 @@
-from pgvector.django import L2Distance, CosineDistance
-from ..models import StyleEmbedding, Product, ImageSegment, StyleImage, RecommendationLog
+from pgvector.django import CosineDistance
+from ..models import StyleEmbedding, Product, RecommendationLog
 from django.db import transaction
+from django.db.models import Q
 
-def get_recommendations(user_segment_id, top_n=10):
+
+def get_recommendations(user_segment_id, top_n=10, gender=None):
     """
     Finds the top N most similar products to a user's style segment using Cosine Distance
     and logs the recommendation.
@@ -20,10 +22,17 @@ def get_recommendations(user_segment_id, top_n=10):
 
     # 2. Query the database for similar products
     # Using pgvector's CosineDistance for similarity search on Product.embedding
-    recommended_products = Product.objects.filter(
-        embedding__isnull=False,  # Only consider products with embeddings
+    base_qs = Product.objects.filter(
+        embedding__isnull=False,
         categories=segment.category_type
-    ).annotate(
+    )
+
+    # If the user supplied gender on the style image, filter products to match
+    # Use provided gender (transient) if passed
+    if gender:
+        base_qs = base_qs.filter(Q(gender__iexact=gender) | Q(gender__isnull=True) | Q(gender="Unisex"))
+
+    recommended_products = base_qs.annotate(
         # Calculate the distance between the user's embedding and product embeddings
         # CosineDistance(a, b) = 1 - cos(theta), so smaller values are more similar
         distance=CosineDistance('embedding', user_embedding)
@@ -59,7 +68,7 @@ def get_recommendations_by_embedding(user_embedding, top_n=10):
     ).order_by(
         'distance'
     )[:top_n]
-    
+
     return list(recommended_products)
 
 
@@ -68,35 +77,35 @@ def debug_recommendations(user_segment_id, top_n=10):
     Debug function to see what's happening in the recommendation process
     """
     print(f"🔍 Debugging recommendations for segment: {user_segment_id}")
-    
+
     try:
         # 1. Get the user's embedding
         user_embedding_obj = StyleEmbedding.objects.get(segment__segmentId=user_segment_id)
         user_embedding = user_embedding_obj.embeddings
         print(f"✅ User embedding found: {len(user_embedding)} dimensions")
-        
+
         # 2. Check available products
         total_products = Product.objects.count()
         products_with_embeddings = Product.objects.filter(embedding__isnull=False).count()
         print(f"📦 Products: {total_products} total, {products_with_embeddings} with embeddings")
-        
+
         if products_with_embeddings == 0:
             print("❌ No products with embeddings found!")
             return []
-        
+
         # 3. Get recommendations with distance info
         recommended_products = Product.objects.filter(
             embedding__isnull=False
         ).annotate(
             distance=CosineDistance('embedding', user_embedding)
         ).order_by('distance')[:top_n]
-        
+
         print(f"🎯 Found {len(recommended_products)} recommendations:")
         for i, product in enumerate(recommended_products, 1):
             print(f"   {i}. {product.name} (SKU: {product.sku}) - Distance: {product.distance:.4f}")
-        
+
         return list(recommended_products)
-        
+
     except StyleEmbedding.DoesNotExist:
         print(f"❌ No StyleEmbedding found for segment {user_segment_id}")
         return []
