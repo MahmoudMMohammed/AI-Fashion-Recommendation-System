@@ -30,23 +30,20 @@ class SegFormerSegmenter:
             id2label = cls._instance.model.config.id2label
             cls._instance.categories_to_drop = {
                 'Background', 'Hair', 'Face', 'Left-leg',
-                'Right-leg', 'Left-arm', 'Right-arm', 'Left-shoe'
+                'Right-leg', 'Left-arm', 'Right-arm'
             }
-            # This dictionary will hold the final mapping from the label name we care about
-            # to its corresponding ID from the model.
             cls._instance.label_map = {}
             for lbl_id, lbl_name in id2label.items():
-                if lbl_name in cls._instance.categories_to_drop:
-                    continue  # Skip this category
-
-                # Remap 'Right-shoe' to our database category 'Footwear'
-                if lbl_name == 'Right-shoe':
-                    final_category_name = 'Footwear'
-                # Standardize category names to be lowercase for consistent DB lookups
+                # ⇢ Normalise both shoe labels to one category
+                if lbl_name in {'Right-shoe', 'Left-shoe'}:
+                    final_category_name = 'footwear'
+                elif lbl_name in cls._instance.categories_to_drop:
+                    continue
                 else:
                     final_category_name = lbl_name.lower().replace('-', ' ')
 
-                cls._instance.label_map[final_category_name] = int(lbl_id)
+                # keep only the *first* shoe we meet, ignore the duplicate
+                cls._instance.label_map.setdefault(final_category_name, int(lbl_id))
 
         return cls._instance
 

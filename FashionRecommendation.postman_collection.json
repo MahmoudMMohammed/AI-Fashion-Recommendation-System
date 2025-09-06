@@ -1296,79 +1296,6 @@
 									"formdata": []
 								},
 								"url": {
-									"raw": "http://localhost:8000/api/products/?page_size=1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8000",
-									"path": [
-										"api",
-										"products",
-										""
-									],
-									"query": [
-										{
-											"key": "page_size",
-											"value": "1"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": null,
-							"header": [
-								{
-									"key": "Date",
-									"value": "Sun, 10 Aug 2025 12:59:26 GMT"
-								},
-								{
-									"key": "Server",
-									"value": "WSGIServer/0.2 CPython/3.12.5"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Allow",
-									"value": "GET, POST, HEAD, OPTIONS"
-								},
-								{
-									"key": "X-Frame-Options",
-									"value": "DENY"
-								},
-								{
-									"key": "Content-Length",
-									"value": "1891"
-								},
-								{
-									"key": "X-Content-Type-Options",
-									"value": "nosniff"
-								},
-								{
-									"key": "Referrer-Policy",
-									"value": "same-origin"
-								},
-								{
-									"key": "Cross-Origin-Opener-Policy",
-									"value": "same-origin"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"message\": \"OK\",\n    \"data\": [\n        {\n            \"productId\": \"ed445259-f74c-456d-b94b-80c532e270b5\",\n            \"name\": \"Architect end-to-end paradigms\",\n            \"description\": \"Number allow former final turn store summer. Radio church recent perhaps almost. Quickly to list side seat college certain nature. Series almost house. Choose play bad activity lead drop. Beautiful government must get realize accept always.\",\n            \"base_price\": \"152.49\",\n            \"discount_percent\": \"10.00\",\n            \"final_price\": 137.241,\n            \"stock_quantity\": 20,\n            \"categories\": [\n                {\n                    \"categoryId\": \"ad465a14-db12-4350-9d6c-fec03d708ea7\",\n                    \"name\": \"Leggings\",\n                    \"description\": \"Products related to leggings\"\n                },\n                {\n                    \"categoryId\": \"0806ba47-de31-4bbb-92a2-77ef54b26333\",\n                    \"name\": \"Headwear\",\n                    \"description\": \"Products related to headwear\"\n                },\n                {\n                    \"categoryId\": \"55dfa701-ebf3-4a49-9ae3-68e126a0ebf8\",\n                    \"name\": \"Eyeglass\",\n                    \"description\": \"Products related to eyeglass\"\n                }\n            ],\n            \"sizes\": [\n                {\n                    \"sizeId\": \"0fe30acc-294e-4223-be72-00efd4689f1a\",\n                    \"label\": \"S\",\n                    \"dimensions\": \"\"\n                },\n                {\n                    \"sizeId\": \"1f7258d8-9baf-4f6a-802a-23e7f1d7d929\",\n                    \"label\": \"XL\",\n                    \"dimensions\": \"\"\n                }\n            ],\n            \"images\": [\n                {\n                    \"id\": \"152f0f4e-23bf-4bdd-a189-3eb38be2ab1e\",\n                    \"image\": \"http://localhost:8000/media/products/fake_image_ed445259-f74c-456d-b94b-80c532e270b5_0.jpg\",\n                    \"alt_text\": \"Image 1 for Architect end-to-end paradigms\"\n                },\n                {\n                    \"id\": \"5b99baae-30b7-4fa0-b139-5aac44eb77eb\",\n                    \"image\": \"http://localhost:8000/media/products/fake_image_ed445259-f74c-456d-b94b-80c532e270b5_1.jpg\",\n                    \"alt_text\": \"Image 2 for Architect end-to-end paradigms\"\n                },\n                {\n                    \"id\": \"8fbc2bd1-4b22-40ac-9f36-6541325b9288\",\n                    \"image\": \"http://localhost:8000/media/products/fake_image_ed445259-f74c-456d-b94b-80c532e270b5_2.jpg\",\n                    \"alt_text\": \"Image 3 for Architect end-to-end paradigms\"\n                }\n            ]\n        }\n    ],\n    \"count\": 50,\n    \"total_pages\": 50,\n    \"page\": 1,\n    \"page_size\": 1,\n    \"next\": \"http://localhost:8000/api/products/?page=2&page_size=1\",\n    \"prev\": null,\n    \"first\": \"http://localhost:8000/api/products/?page=1&page_size=1\",\n    \"last\": \"http://localhost:8000/api/products/?page=50&page_size=1\"\n}"
-						},
-						{
-							"name": "success",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": []
-								},
-								"url": {
 									"raw": "http://localhost:8000/api/products/?page_size=5&search=ADIDAS&category=pants&gender=male&size=m&ordering=name",
 									"protocol": "http",
 									"host": [
@@ -3373,7 +3300,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2ODA3Mjk0LCJpYXQiOjE3NTY4MDM2OTQsImp0aSI6IjUwOTkzNDk0OTlmYTQ4OTQ5Yjk3ZmMwNmU0NWE4N2UyIiwidXNlcl9pZCI6IjQ0In0.MBDoQRxFEqQ5tIHRtpW6NzKNVEv5Ke0g7FnplBGGJeo",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2ODIxMTM4LCJpYXQiOjE3NTY4MTc1MzgsImp0aSI6IjQ5MGE3YjYxZmRjMTQ4Y2Y4MDMxNTQ3ZTY2NjVkMzU5IiwidXNlcl9pZCI6IjQ0In0.CCJtLlZeErXHZK3-aRnlPK4NLAOU_XoPxtCucpjvW7w",
 									"type": "string"
 								}
 							]
@@ -3714,7 +3641,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2ODA3Mjk0LCJpYXQiOjE3NTY4MDM2OTQsImp0aSI6IjUwOTkzNDk0OTlmYTQ4OTQ5Yjk3ZmMwNmU0NWE4N2UyIiwidXNlcl9pZCI6IjQ0In0.MBDoQRxFEqQ5tIHRtpW6NzKNVEv5Ke0g7FnplBGGJeo",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3MTYwNTQ0LCJpYXQiOjE3NTcxNTY5NDQsImp0aSI6IjA2N2E1ZTdhMTZmNjQ4ZDM5ZDVmMmUyMTk2ZDgwMmJjIiwidXNlcl9pZCI6IjQ0In0.UKM2hMa5vFWhCD-KKn96RvdtokvnAfrdXYEyllTzsJ0",
 									"type": "string"
 								}
 							]
@@ -3727,7 +3654,12 @@
 								{
 									"key": "image_url",
 									"type": "file",
-									"src": "/C:/Users/Mahmoud/Desktop/clothing-segmentation/images/input.jpg"
+									"src": "/C:/Users/Mahmoud/Desktop/clothing-segmentation/images/image.jpg"
+								},
+								{
+									"key": "gender",
+									"value": "Male",
+									"type": "text"
 								}
 							]
 						},
@@ -3818,6 +3750,84 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"success\": true,\n    \"message\": null,\n    \"data\": {\n        \"styleImageId\": \"db0f3758-48d2-4beb-a1c5-44d6726a9935\",\n        \"image_url\": \"http://localhost:8000/media/style_images/input2_DYZktzi.jpg\",\n        \"uploaded_at\": \"2025-08-10T13:10:31.503371Z\"\n    }\n}"
+						},
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image_url",
+											"type": "file",
+											"src": "/C:/Users/Mahmoud/Desktop/clothing-segmentation/images/image.jpg"
+										},
+										{
+											"key": "gender",
+											"value": "Male",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/style-images/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"style-images",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 06 Sep 2025 11:20:13 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "203"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": null,\n    \"data\": {\n        \"styleImageId\": \"ffaf1547-6033-439a-ae2e-49eae56904a5\",\n        \"image_url\": \"http://localhost:8000/media/style_images/image.jpg\",\n        \"uploaded_at\": \"2025-09-06T11:20:11.025095Z\"\n    }\n}"
 						}
 					]
 				},
@@ -3829,7 +3839,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2NTc1NTg1LCJpYXQiOjE3NTY1NzE5ODUsImp0aSI6ImNhMzcxODJiOWI2ZDQwYTY5MzU5Zjc2OTBmODQzZWM2IiwidXNlcl9pZCI6IjEyIn0.27BM8sOfYyrBvqkiCo3Vz_falQUxQts_AAeGNUiFWs4",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2ODIxMTM4LCJpYXQiOjE3NTY4MTc1MzgsImp0aSI6IjQ5MGE3YjYxZmRjMTQ4Y2Y4MDMxNTQ3ZTY2NjVkMzU5IiwidXNlcl9pZCI6IjQ0In0.CCJtLlZeErXHZK3-aRnlPK4NLAOU_XoPxtCucpjvW7w",
 									"type": "string"
 								}
 							]
@@ -3840,8 +3850,8 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "log",
-									"value": "9d1a29c7-3319-4e8c-9280-78bfef352d26",
+									"key": "logId",
+									"value": "a2ca1e78-39f0-4f81-984b-2a35ee0b4e2c",
 									"type": "text"
 								},
 								{

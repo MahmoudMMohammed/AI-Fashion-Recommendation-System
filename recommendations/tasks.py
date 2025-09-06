@@ -1,9 +1,7 @@
 import io
 
-import cv2
 from celery import shared_task
 from django.core.files.base import ContentFile
-from django.db import transaction
 from users.notifications.tasks import send_notification_task
 
 from .models import StyleImage, ImageSegment, Category
@@ -77,7 +75,7 @@ def process_style_image_segmentation(style_image_id, gender=None):
     send_notification_task.delay(
         user_id=user_id,
         title="Results are ready!",
-        message=f"We found 10 products that fit your style.",
+        message=f"We found {len(saved_categories) * 10} products that fit your style.",
         payload={"style_image": str(style_image)},
     )
 
